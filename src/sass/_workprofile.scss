@@ -1,0 +1,104 @@
+.work {
+  .work-profile {
+    display: flex;
+    background: #e9fafc;
+    ul {
+      padding: 10px 40px;
+      text-decoration: none;
+      li {
+        margin-bottom: 30px;
+        list-style: none;
+        font-weight: normal;
+        font-size: 18px;
+
+        color: #298da6;
+      }
+    }
+    .worker-details {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .little-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        align-self: stretch;
+        margin-bottom: 20px;
+        p {
+          font-weight: bold;
+          font-size: 30px;
+          line-height: 47px;
+          color: #000000;
+        }
+        button {
+          padding: 10px 20px;
+          background: #288ea5;
+          border-radius: 10px;
+          font-weight: 500;
+          font-size: 20px;
+          color: #ffffff;
+          border: none;
+        }
+      }
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+      .name {
+        font-weight: bold;
+        font-size: 30px;
+        color: #000000;
+      }
+      .work-domain {
+        font-weight: normal;
+        font-size: 20px;
+        color: #000000;
+        margin-bottom: 20px;
+      }
+      .details-worker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: white;
+        margin-bottom: 40px;
+        width: 600px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 10px rgb(150, 150, 150);
+
+        button {
+          align-self: stretch;
+          padding: 10px 30px;
+          background: #66aced;
+          border-radius: 10px 10px 0px 0px;
+          font-weight: bold;
+          font-size: 30px;
+          color: #000000;
+          border: none;
+          margin-bottom: 20px;
+        }
+        p {
+          padding: 0px 50px;
+          font-weight: normal;
+          font-size: 20px;
+          color: #0c0c0c;
+        }
+        .first {
+          margin-bottom: 10px;
+        }
+        .header-second {
+          align-self: flex-start;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+        .thrid {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+.filter {
+  .filter-component {
+    display: flex;
+    background: #e9fafc;
+    justify-content: space-between;
+    ul {
+      padding: 10px 40px;
+      text-decoration: none;
+      li {
+        margin-bottom: 30px;
+        list-style: none;
+        font-weight: normal;
+        font-size: 18px;
+
+        color: #298da6;
+      }
+    }
+    .filter-header {
+      margin-top: 40px;
+      flex: 0.3;
+      .filters {
+        display: flex;
+        margin-bottom: 20px;
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px 20px;
+          background: #cce7ea;
+          border: none;
+          border-radius: 14px;
+          margin-right: 10px;
+
+          span {
+            margin-left: 10px;
+          }
+        }
+      }
+      .filter-values {
+        display: flex;
+        justify-content: space-between;
+        background: #cce7ea;
+        border-radius: 20px;
+        padding: 10px 40px;
+        align-items: center;
+        margin-bottom: 40px;
+        .value {
+          .name {
+            font-weight: bold;
+            font-size: 25px;
+            color: #000000;
+            margin-bottom: 10px;
+          }
+          .gender {
+            font-weight: normal;
+            font-size: 14px;
+            color: #000000;
+            margin-bottom: 10px;
+          }
+          .reviews {
+            display: flex;
+
+            align-items: center;
+            margin-bottom: 10px;
+
+            .filter-type {
+              font-weight: normal;
+              font-size: 14px;
+              color: #000000;
+              margin-right: 10px;
+              margin-left: 30px;
+            }
+          }
+          p {
+            font-weight: normal;
+            font-size: 16px;
+            color: #090808;
+          }
+        }
+        .user-img {
+          align-self: flex-start;
+          img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+    img {
+      align-self: flex-end;
+    }
+  }
+}

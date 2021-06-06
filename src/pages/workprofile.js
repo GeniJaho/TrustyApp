@@ -1,7 +1,7 @@
 import React from "react";
 import userphoto from "../assets/Rectangle15.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const WorkProfile = () => {
   return (

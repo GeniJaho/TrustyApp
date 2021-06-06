@@ -7,9 +7,11 @@ const Navbar = () => {
     <div className="navbar">
       <nav>
         <div className="logo">
-          <img src={Logo} alt="" />
+          <a href="home"><img src={Logo} alt="" /></a>
         </div>
+        
         <ul>
+
           <NavLink
             to="/home"
             activeStyle={{
@@ -20,6 +22,7 @@ const Navbar = () => {
           >
             <li>Home</li>
           </NavLink>
+
           <NavLink
             to="/about"
             activeStyle={{
@@ -28,8 +31,9 @@ const Navbar = () => {
             }}
             style={{ textDecoration: "none", color: "#000000" }}
           >
-            <li>About</li>
+            <li>Über uns</li>
           </NavLink>
+
           <NavLink
             to="/filter"
             activeStyle={{
@@ -38,8 +42,9 @@ const Navbar = () => {
             }}
             style={{ textDecoration: "none", color: "#000000" }}
           >
-            <li>Filter</li>
+            <li>Suchen</li>
           </NavLink>
+
           <NavLink
             to="/user"
             activeStyle={{
@@ -48,8 +53,9 @@ const Navbar = () => {
             }}
             style={{ textDecoration: "none", color: "#000000" }}
           >
-            <li>User Profile</li>
+            <li>Kunden Profil</li>
           </NavLink>
+
           <NavLink
             to="/work"
             activeStyle={{
@@ -58,9 +64,11 @@ const Navbar = () => {
             }}
             style={{ textDecoration: "none", color: "#000000" }}
           >
-            <li>Work Profile</li>
+            <li>Handwerker Profil</li>
           </NavLink>
+
         </ul>
+
         <div className="nav-button">
           <Link to="/signup">
             <button>Registrieren</button>
@@ -69,6 +77,7 @@ const Navbar = () => {
             <button>Anmelden</button>
           </Link>
         </div>
+
       </nav>
     </div>
   );

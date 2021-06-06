@@ -3,7 +3,7 @@ import tower1 from "../assets/Rectangle55.png";
 import userphoto from "../assets/Rectangle15.png";
 import pencil from "../assets/pencil.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const UserProfile = () => {
   return (
@@ -32,7 +32,7 @@ const UserProfile = () => {
               <img src={pencil} alt="" />
             </div>
             <p className="user-name">Elizabeth 25</p>
-            <button className="tier">Free</button>
+{/*             <button className="tier">Free</button>*/}     
           </div>
           <div className="user-detail">
             <div className="email">
@@ -57,14 +57,14 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          <div className="user-plan">
+          {/* <div className="user-plan">
             <p>Subscriptions</p>
             <div className="plan-switch">
               <button>Take Free</button>
               <button>Upgrade to pro</button>
             </div>
             <button className="upgrade">See the Pro Benefits {`->`}</button>
-          </div>
+          </div> */}
           <div className="sign-out">
             <button className="signout">Sign Out</button>
           </div>

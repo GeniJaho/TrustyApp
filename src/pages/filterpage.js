@@ -4,7 +4,7 @@ import Stars from "../assets/stars.png";
 import userphoto from "../assets/Rectangle15.png";
 import tower1 from "../assets/Rectangle55.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const Filter = () => {
   return (
@@ -22,7 +22,7 @@ const Filter = () => {
         <div className="filter-header">
           <div className="filters">
             <button>
-              ort
+              Ort
               <span>
                 <img src={Down} alt="" />
               </span>

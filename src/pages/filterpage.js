@@ -4,7 +4,7 @@ import Stars from "../assets/stars.png";
 import userphoto from "../assets/Rectangle15.png";
 import tower1 from "../assets/Rectangle55.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const Filter = () => {
   return (
@@ -22,7 +22,7 @@ const Filter = () => {
         <div className="filter-header">
           <div className="filters">
             <button>
-              ort
+              Ort
               <span>
                 <img src={Down} alt="" />
               </span>
@@ -54,7 +54,7 @@ const Filter = () => {
           </div>
           <div className="filter-values">
             <div className="value">
-              <p className="name">Full Name</p>
+              <p className="name">Max Muster</p>
               <p className="gender">Maler</p>
               <div className="reviews">
                 <img src={Stars} alt="" />
@@ -70,11 +70,11 @@ const Filter = () => {
           </div>
           <div className="filter-values">
             <div className="value">
-              <p className="name">Full Name</p>
+              <p className="name">Lukas Bergmann</p>
               <p className="gender">Maler</p>
               <div className="reviews">
                 <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 35</p>
+                <p className="filter-type">Bewertungen 11</p>
               </div>
               <p>
                 In publishing and graphic design, Lorem ipsum is a placeholder.
@@ -86,11 +86,11 @@ const Filter = () => {
           </div>
           <div className="filter-values">
             <div className="value">
-              <p className="name">Full Name</p>
+              <p className="name">Anna Mauer</p>
               <p className="gender">Maler</p>
               <div className="reviews">
                 <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 35</p>
+                <p className="filter-type">Bewertungen 2</p>
               </div>
               <p>
                 In publishing and graphic design, Lorem ipsum is a placeholder.
@@ -102,11 +102,11 @@ const Filter = () => {
           </div>
           <div className="filter-values">
             <div className="value">
-              <p className="name">Full Name</p>
+              <p className="name">John Müller</p>
               <p className="gender">Maler</p>
               <div className="reviews">
                 <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 35</p>
+                <p className="filter-type">Bewertungen 10</p>
               </div>
               <p>
                 In publishing and graphic design, Lorem ipsum is a placeholder.

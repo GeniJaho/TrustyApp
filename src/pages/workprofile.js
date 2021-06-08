@@ -1,7 +1,7 @@
 import React from "react";
 import userphoto from "../assets/Rectangle15.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const WorkProfile = () => {
   return (
@@ -27,9 +27,7 @@ const WorkProfile = () => {
           <div className="details-worker">
             <button className="type">PERSONAL</button>
             <p className="first">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonly used to demonstrate the visual form of a document or
-              a typeface without relying on meaningful content.
+              <strong>Adresse:</strong> musterstraße 01, musterstadt
             </p>
             <p className="header-second">Beschreibung </p>
             <p className="thrid">

@@ -27,9 +27,7 @@ const WorkProfile = () => {
           <div className="details-worker">
             <button className="type">PERSONAL</button>
             <p className="first">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonly used to demonstrate the visual form of a document or
-              a typeface without relying on meaningful content.
+              <strong>Adresse:</strong> musterstraße 01, musterstadt
             </p>
             <p className="header-second">Beschreibung </p>
             <p className="thrid">

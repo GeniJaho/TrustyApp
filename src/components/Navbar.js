@@ -24,17 +24,6 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/about"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "#298da6",
-            }}
-            style={{ textDecoration: "none", color: "#000000" }}
-          >
-            <li>Über uns</li>
-          </NavLink>
-
-          <NavLink
             to="/filter"
             activeStyle={{
               fontWeight: "bold",
@@ -65,6 +54,17 @@ const Navbar = () => {
             style={{ textDecoration: "none", color: "#000000" }}
           >
             <li>Handwerker Profil</li>
+          </NavLink>
+
+          <NavLink
+            to="/about"
+            activeStyle={{
+              fontWeight: "bold",
+              color: "#298da6",
+            }}
+            style={{ textDecoration: "none", color: "#000000" }}
+          >
+            <li>Über uns</li>
           </NavLink>
 
         </ul>

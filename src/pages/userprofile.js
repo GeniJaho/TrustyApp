@@ -32,7 +32,7 @@ const UserProfile = () => {
               <img src={pencil} alt="" />
             </div>
             <p className="user-name">Elizabeth 25</p>
-{/*             <button className="tier">Free</button>*/}     
+            {/*<button className="tier">Free</button>*/}     
           </div>
           <div className="user-detail">
             <div className="email">
@@ -66,7 +66,7 @@ const UserProfile = () => {
             <button className="upgrade">See the Pro Benefits {`->`}</button>
           </div> */}
           <div className="sign-out">
-            <button className="signout">Sign Out</button>
+            <button className="signout">Abmelden</button>
           </div>
         </div>
         <div className="tower2">

@@ -22,7 +22,7 @@ const WorkProfile = () => {
             <button>kontaktieren</button>
           </div>
           <img src={userphoto} alt="" />
-          <p className="name">Srinath Bro</p>
+          <p className="name">Lukas Bergmann</p>
           <p className="work-domain">Painter , 23</p>
           <div className="details-worker">
             <button className="type">PERSONAL</button>

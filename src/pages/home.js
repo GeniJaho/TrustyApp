@@ -21,15 +21,15 @@ const Home = () => {
         <div className="search-component">
           <p>Finden Sie die</p>
           <p>
-            <span>Perfekte</span> Person fur
+            <span>perfekte</span> Person für
           </p>
-          <p>Ihr Problem</p>
+          <p>ihr Problem</p>
           <div className="search-container">
             <div className="search-tile">
               <img src={Search} alt="" />
               <input type="text" />
             </div>
-            <button>Search</button>
+            <button>Suchen</button>
           </div>
         </div>
       </div>

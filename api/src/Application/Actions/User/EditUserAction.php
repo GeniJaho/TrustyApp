@@ -5,15 +5,18 @@ namespace App\Application\Actions\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
-class ViewUserAction extends UserAction
+class EditUserAction extends UserAction
 {
     /**
      * {@inheritdoc}
      */
     protected function action(): Response
     {
+        $data = $this->getFormData();
+
         $userId = (int) $this->resolveArg('id');
-        $user = $this->userRepository->findUserOfId($userId);
+
+        $user = $this->userRepository->update($userId, $data);
 
         return $this->respondWithData($user);
     }

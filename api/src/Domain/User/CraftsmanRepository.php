@@ -16,4 +16,17 @@ interface CraftsmanRepository
      * @throws UserNotFoundException
      */
     public function findCraftsmanOfId(int $id): Craftsman;
+
+    /**
+     * @param array $data
+     * @return Craftsman
+     */
+    public function store(array $data): Craftsman;
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return Craftsman
+     */
+    public function update(int $id, array $data): Craftsman;
 }

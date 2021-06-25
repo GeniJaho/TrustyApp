@@ -14,7 +14,13 @@ class DeleteReviewAction extends ReviewAction
     {
         $id = (int) $this->resolveArg('id');
 
+        $review = $this->reviewRepository->findReviewOfId($id);
+
         $this->reviewRepository->destroy($id);
+
+        $this->craftsmanRepository->update($review->to_id, [
+            'rating' => $review->craftsman->averageRating()
+        ]);
 
         return $this->respondWithData();
     }

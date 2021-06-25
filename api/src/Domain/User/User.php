@@ -3,62 +3,9 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
-use JsonSerializable;
+use Illuminate\Database\Eloquent\Model;
 
-class User implements JsonSerializable
+class User extends Model
 {
-    /**
-     * @var int|null
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    public $username;
-
-    /**
-     * @var string
-     */
-    public $fullName;
-
-    /**
-     * @var int
-     */
-    public $age;
-
-    /**
-     * @param int|null $id
-     * @param string $username
-     * @param string $fullName
-     * @param int|null $age
-     */
-    public function __construct(?int $id, string $username, string $fullName, ?int $age)
-    {
-        $this->id = $id;
-        $this->username = strtolower($username);
-        $this->fullName = ucwords($fullName);
-        $this->age = $age;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return [
-            'id' => $this->id,
-            'username' => $this->username,
-            'fullName' => $this->fullName,
-            'age' => $this->age,
-        ];
-    }
+    protected $guarded = [];
 }

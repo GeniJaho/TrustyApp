@@ -8,6 +8,7 @@ use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -26,4 +27,24 @@ return function (ContainerBuilder $containerBuilder) {
             return $logger;
         },
     ]);
+
+    $capsule = new Capsule;
+
+    $capsule->addConnection([
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'database' => 'trusty',
+        'port' => 33060,
+        'username' => 'homestead',
+        'password' => 'secret',
+        'charset' => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix' => '',
+    ]);
+
+// Make this Capsule instance available globally via static methods... (optional)
+    $capsule->setAsGlobal();
+
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+    $capsule->bootEloquent();
 };

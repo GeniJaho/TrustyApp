@@ -12,12 +12,10 @@ class ListCraftsmenAction extends CraftsmanAction
      */
     protected function action(): Response
     {
-        $sort = $this->request->getQueryParams()['sort'] ?? 'fullName';
+        $sort = $this->request->getQueryParams()['sort'] ?? 'full_name';
         $order = $this->request->getQueryParams()['order'] ?? 'asc';
 
         $craftsmen = $this->craftsmanRepository->findAll($sort, $order === 'asc');
-
-        $this->logger->info("Craftsmen list was viewed.");
 
         return $this->respondWithData($craftsmen);
     }

@@ -24,6 +24,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
+        "fzaninotto/faker": "^1.9",
         "illuminate/collections": "^8.48",
         "illuminate/database": "^8.48",
         "lulco/phoenix": "^1.8",
@@ -44,7 +45,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {

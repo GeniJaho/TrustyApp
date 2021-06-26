@@ -24,7 +24,9 @@ class ReviewFactory extends Factory
             'body' => $faker->sentence,
             'rating' => $faker->randomDigit,
             'from_id' => User::factory()->create()->id,
-            'to_id' => Craftsman::factory()->create()->id
+            'to_id' => Craftsman::factory()->create()->id,
+            // Fix for "php seeder.php" 
+            'created_at' => $faker->datetime
         ];
     }
 }

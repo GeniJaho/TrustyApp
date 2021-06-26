@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\Auth\LoginUserAction;
 use App\Application\Actions\Review\CreateReviewAction;
 use App\Application\Actions\Review\DeleteReviewAction;
 use App\Application\Actions\Review\ListReviewsAction;
@@ -17,6 +18,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use Tuupola\Middleware\JwtAuthentication;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -26,14 +28,15 @@ return function (App $app) {
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
-        $group->post('', CreateUserAction::class);
+//        $group->post('', CreateUserAction::class);
+        $group->post('/login', LoginUserAction::class);
         $group->get('/{id}', ViewUserAction::class);
         $group->patch('/{id}', EditUserAction::class);
     });
 
     $app->group('/craftsmen', function (Group $group) {
         $group->get('', ListCraftsmenAction::class);
-        $group->post('', CreateCraftsmanAction::class);
+//        $group->post('', CreateCraftsmanAction::class);
         $group->get('/{id}', ViewCraftsmanAction::class);
         $group->patch('/{id}', EditCraftsmanAction::class);
     });

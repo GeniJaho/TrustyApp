@@ -36,7 +36,7 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
 
     public function store(array $data): Craftsman
     {
-        return new Craftsman([
+        return Craftsman::create([
             'username' => $data['username'],
             'full_name' => $data['full_name'],
             'price' => $data['price'],

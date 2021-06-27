@@ -18,6 +18,10 @@ class RegisterUserAction extends AuthAction
      */
     protected function action(): Response
     {
+        if (!$this->isGuest()) {
+            throw new Exception("You're already signed in.");
+        }
+
         $data = $this->getFormData();
 
         if (empty($data['username']) || empty($data['full_name']) ||
@@ -37,13 +41,9 @@ class RegisterUserAction extends AuthAction
 
         $user = $this->userRepository->store($data);
 
-        $token = Token::create(
-            "u" . $user->id,
-            $_ENV["JWT_SECRET"],
-            time() + 3600,
-            'localhost'
-        );
+        $token = $this->createCustomerToken($user);
 
         return $this->respondWithData(['user' => $user, 'token' => $token]);
     }
+
 }

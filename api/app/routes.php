@@ -7,8 +7,6 @@ use App\Application\Actions\Review\CreateReviewAction;
 use App\Application\Actions\Review\DeleteReviewAction;
 use App\Application\Actions\Review\ListReviewsAction;
 use App\Application\Actions\Review\ViewReviewAction;
-use App\Application\Actions\User\CreateCraftsmanAction;
-use App\Application\Actions\User\CreateUserAction;
 use App\Application\Actions\User\EditCraftsmanAction;
 use App\Application\Actions\User\EditUserAction;
 use App\Application\Actions\User\ListCraftsmenAction;
@@ -29,18 +27,24 @@ return function (App $app) {
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
-//        $group->post('', CreateUserAction::class);
+        $group->patch('', EditUserAction::class)
+            ->add(new JwtAuthentication([
+                'secret' => $_ENV['JWT_SECRET'],
+                'secure' => false
+            ]));
         $group->post('/login', LoginUserAction::class);
         $group->post('/register', RegisterUserAction::class);
         $group->get('/{id}', ViewUserAction::class);
-        $group->patch('/{id}', EditUserAction::class);
     });
 
     $app->group('/craftsmen', function (Group $group) {
         $group->get('', ListCraftsmenAction::class);
-//        $group->post('', CreateCraftsmanAction::class);
         $group->get('/{id}', ViewCraftsmanAction::class);
-        $group->patch('/{id}', EditCraftsmanAction::class);
+        $group->patch('/{id}', EditCraftsmanAction::class)
+            ->add(new JwtAuthentication([
+                'secret' => $_ENV['JWT_SECRET'],
+                'secure' => false
+            ]));
     });
 
     $app->group('/reviews', function (Group $group) {

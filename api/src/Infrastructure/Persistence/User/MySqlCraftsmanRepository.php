@@ -14,8 +14,8 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
      */
     public function findAll($sort = 'full_name', $ascending = true): array
     {
-        return Craftsman::all()
-            ->orderBy($sort, $ascending ? 'asc' : 'desc')
+        return Craftsman::orderBy($sort, $ascending ? 'asc' : 'desc')
+            ->get()
             ->values()
             ->toArray();
     }

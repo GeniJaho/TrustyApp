@@ -35,7 +35,8 @@ class MySqlUserRepository implements UserRepository
     {
         return User::create([
             'username' => $data['username'],
-            'full_name' => $data['full_name']
+            'full_name' => $data['full_name'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT)
         ]);
     }
 
@@ -55,5 +56,10 @@ class MySqlUserRepository implements UserRepository
         $user->save();
 
         return $user;
+    }
+
+    public function findUserOfUsername(string $username): ?User
+    {
+        return User::whereUsername($username)->first();
     }
 }

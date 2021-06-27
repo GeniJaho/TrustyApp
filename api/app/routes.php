@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Application\Actions\Auth\LoginUserAction;
+use App\Application\Actions\Auth\RegisterUserAction;
 use App\Application\Actions\Review\CreateReviewAction;
 use App\Application\Actions\Review\DeleteReviewAction;
 use App\Application\Actions\Review\ListReviewsAction;
@@ -30,6 +31,7 @@ return function (App $app) {
         $group->get('', ListUsersAction::class);
 //        $group->post('', CreateUserAction::class);
         $group->post('/login', LoginUserAction::class);
+        $group->post('/register', RegisterUserAction::class);
         $group->get('/{id}', ViewUserAction::class);
         $group->patch('/{id}', EditUserAction::class);
     });

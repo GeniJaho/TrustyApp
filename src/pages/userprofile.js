@@ -1,11 +1,38 @@
-import React from "react";
+/* eslint-disable*/
+import React, { useEffect, useState } from "react";
 import tower1 from "../assets/Rectangle55.png";
 import userphoto from "../assets/Rectangle15.png";
 import pencil from "../assets/pencil.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import axios from "axios";
 
-const UserProfile = () => {
+const UserProfile = ({ auth }) => {
+  // Variables
+  const [fullName, setFullName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [display, setDisplay] = useState('none');
+  // Fething user Data
+  const fetchUserData = () => {
+    if (auth) {
+      axios.get('http://trusty.local/users/1')
+      .then(res => {
+        setFullName(res.data.data.full_name);
+        setUserName(res.data.data.username)
+      })
+    }
+  }
+  // User Authentication Mimic
+  const authMimic = () => {
+    if (auth) {
+      setDisplay('initial')
+      return
+    }
+    setDisplay('none')
+  }
+  useEffect(()=>{
+    fetchUserData()
+    authMimic()
+  },[auth])
   return (
     <div className="user">
       <Navbar></Navbar>
@@ -22,7 +49,7 @@ const UserProfile = () => {
 
           <img src={tower1} alt="" />
         </div>
-        <div className="user-details">
+        <div style={{display: `${display}`}} className="user-details">
           <div className="user-title">
             <button className="button-one">USER PROFILE</button>
             <div className="circular-icon">
@@ -31,20 +58,20 @@ const UserProfile = () => {
             <div className="circular-pencil">
               <img src={pencil} alt="" />
             </div>
-            <p className="user-name">Elizabeth 25</p>     
+            <p className="user-name">{fullName}</p>     
           </div>
           <div className="user-detail">
             <div className="email">
               <p className="email-one">Display name</p>
               <div className="email-part">
-                <p>Eli_Zabeth</p>
+                <p>{fullName}</p>
                 <button>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Email</p>
               <div className="email-part">
-                <p>icaniwilldk@gmail.com</p>
+                <p>{userName}</p>
                 <button>Edit</button>
               </div>
             </div>
@@ -64,7 +91,6 @@ const UserProfile = () => {
           <img src={tower1} alt="" />
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

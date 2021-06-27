@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Down from "../assets/arrowdown.png";
 import Stars from "../assets/stars.png";
 import userphoto from "../assets/Rectangle15.png";
 import tower1 from "../assets/Rectangle55.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import axios from "axios";
 
 const Filter = () => {
+  // Variables
+  const [craftsmen, setCraftsmen] = useState([]);
+
+
+  // No Filter Craftsmen
+  const fetchCraftsmen = () => {
+    axios.get('http://trusty.local/craftsmen')
+    .then(res => setCraftsmen(res.data.data))
+  }
+  // Filtered Craftsmen
+  const filterCraftsmen = filterName => {
+    axios.get(`http://trusty.local/craftsmen?sort=${filterName}&order=asc`)
+    .then(res => setCraftsmen(res.data.data))
+  }
+  // Page load 
+  useEffect(()=>{
+    fetchCraftsmen();
+  },[])
   return (
     <div className="filter">
       <Navbar></Navbar>
@@ -21,25 +39,25 @@ const Filter = () => {
         </ul>
         <div className="filter-header">
           <div className="filters">
-            <button>
+            <button onClick={()=> filterCraftsmen('address')}>
               Ort
               <span>
                 <img src={Down} alt="" />
               </span>
             </button>
-            <button>
+            <button onClick={()=> filterCraftsmen('rating')}>
               Bewertung
               <span>
                 <img src={Down} alt="" />
               </span>
             </button>
-            <button>
+            <button onClick={()=> filterCraftsmen('price')}>
               Preis
               <span>
                 <img src={Down} alt="" />
               </span>
             </button>
-            <button>
+            <button onClick={()=> filterCraftsmen('language')}>
               Sprache
               <span>
                 <img src={Down} alt="" />
@@ -52,74 +70,29 @@ const Filter = () => {
               </span>
             </button>
           </div>
+          {craftsmen.map(craftsman=>{
+            return(
           <div className="filter-values">
             <div className="value">
-              <p className="name">Max Muster</p>
-              <p className="gender">Maler</p>
+              <p className="name">{craftsman.full_name}</p>
+              <p className="gender">{craftsman.craft}</p>
               <div className="reviews">
                 <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 35</p>
+                <p className="filter-type">Bewertungen {craftsman.rating}</p>
               </div>
               <p>
-                In publishing and graphic design, Lorem ipsum is a placeholder.
+                {craftsman.description}
               </p>
             </div>
             <div className="user-img">
               <img src={userphoto} alt="" />
             </div>
           </div>
-          <div className="filter-values">
-            <div className="value">
-              <p className="name">Lukas Bergmann</p>
-              <p className="gender">Maler</p>
-              <div className="reviews">
-                <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 11</p>
-              </div>
-              <p>
-                In publishing and graphic design, Lorem ipsum is a placeholder.
-              </p>
-            </div>
-            <div className="user-img">
-              <img src={userphoto} alt="" />
-            </div>
-          </div>
-          <div className="filter-values">
-            <div className="value">
-              <p className="name">Anna Mauer</p>
-              <p className="gender">Maler</p>
-              <div className="reviews">
-                <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 2</p>
-              </div>
-              <p>
-                In publishing and graphic design, Lorem ipsum is a placeholder.
-              </p>
-            </div>
-            <div className="user-img">
-              <img src={userphoto} alt="" />
-            </div>
-          </div>
-          <div className="filter-values">
-            <div className="value">
-              <p className="name">John Müller</p>
-              <p className="gender">Maler</p>
-              <div className="reviews">
-                <img src={Stars} alt="" />
-                <p className="filter-type">Bewertungen 10</p>
-              </div>
-              <p>
-                In publishing and graphic design, Lorem ipsum is a placeholder.
-              </p>
-            </div>
-            <div className="user-img">
-              <img src={userphoto} alt="" />
-            </div>
-          </div>
+            )
+          })}
         </div>
         <img src={tower1} alt="" />
       </div>
-      <Footer></Footer>
     </div>
   );
 };

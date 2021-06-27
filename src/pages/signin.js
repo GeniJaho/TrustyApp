@@ -30,7 +30,6 @@ const Signin = () => {
       setPassword(changeEvent.target.value)
     }
   }
-  
 
   const createPayload = () => {
     const user = {

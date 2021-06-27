@@ -14,8 +14,8 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
      */
     public function findAll($sort = 'full_name', $ascending = true): array
     {
-        return Craftsman::all()
-            ->orderBy($sort, $ascending ? 'asc' : 'desc')
+        return Craftsman::orderBy($sort, $ascending ? 'asc' : 'desc')
+            ->get()
             ->values()
             ->toArray();
     }
@@ -36,7 +36,7 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
 
     public function store(array $data): Craftsman
     {
-        return new Craftsman([
+        return Craftsman::create([
             'username' => $data['username'],
             'full_name' => $data['full_name'],
             'price' => $data['price'],

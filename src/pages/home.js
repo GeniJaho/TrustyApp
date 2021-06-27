@@ -3,7 +3,6 @@ import Search from "../assets/search.png";
 import Civil from "../assets/civil.png";
 import Cutter from "../assets/cutter.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -53,7 +52,6 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

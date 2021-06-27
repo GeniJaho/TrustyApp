@@ -28,6 +28,9 @@ return function (ContainerBuilder $containerBuilder) {
         },
     ]);
 
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+    $dotenv->safeLoad();
+
     $capsule = new Capsule;
 
     $capsule->addConnection([

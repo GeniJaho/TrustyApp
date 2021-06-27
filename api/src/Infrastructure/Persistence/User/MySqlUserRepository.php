@@ -33,7 +33,7 @@ class MySqlUserRepository implements UserRepository
 
     public function store(array $data): User
     {
-        return new User([
+        return User::create([
             'username' => $data['username'],
             'full_name' => $data['full_name']
         ]);

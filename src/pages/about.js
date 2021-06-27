@@ -1,7 +1,6 @@
 import React from "react";
 import User from "../assets/Rectangle15.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const About = () => {
   return (
@@ -58,7 +57,6 @@ const About = () => {
         />
         <input type="submit" />
       </div>
-      <Footer></Footer>
     </div>
   );
 };

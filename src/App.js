@@ -6,6 +6,7 @@ import UserProfile from "./pages/userprofile";
 import WorkProfile from "./pages/workprofile";
 import Filter from "./pages/filterpage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -16,10 +17,11 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/home" component={Home}></Route>
           <Route path="/about" component={About}></Route>
-          <Route path="/work" component={WorkProfile}></Route>
-          <Route path="/filter" component={Filter}></Route>
-          <Route path="/user" component={UserProfile}></Route>
+          <Route path="/work/:id" component={WorkProfile}></Route>
+          <Route path="/filter" ><Filter/></Route>
+          <Route path="/user"><UserProfile/></Route>
         </Switch>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

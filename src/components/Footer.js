@@ -6,7 +6,7 @@ import insta from "../assets/insta.png";
 import printest from "../assets/printest.png";
 import { useLocation } from "react-router-dom";
 
-const Footer = ({ setAuth, auth }) => {
+const Footer = () => {
   const location = useLocation();
   const [display, setDisplay] = useState('none');
    
@@ -40,7 +40,6 @@ const Footer = ({ setAuth, auth }) => {
       </div>
       <hr />
       <p>Copyrights @ 2021. All rights reserved</p>
-      <button onClick={()=> setAuth(!auth)}>Change Auth</button>
     </div>
     </section>
   );

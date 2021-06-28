@@ -1,8 +1,42 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import userphoto from "../assets/Rectangle15.png";
 import Navbar from "../components/Navbar";
 
 const WorkProfile = () => {
+  // Variables
+  const { id } = useParams();
+  const [craftsmen, setCraftsmen] = useState({});
+  const [reviews, setReviews] = useState([]);
+  // Getting Craftsmen Details
+  const fetchCraftsmenDetails = () => {
+    axios.get(`http://trusty.local/craftsmen/${id}`)
+    .then(res => {
+      setCraftsmen(res.data.data);
+      fetchingReviews();
+    })
+  }
+  // Post Comment
+  const postComment = () => {
+    axios.post(`http://trusty.local/reviews/${id}`,{
+      body: 'Some Text',
+      rating: 1,
+      from_id: 1,
+      to_id: id,
+    }).then(()=> alert("Review Submitted Successfully!"))
+  }
+  // Getting Craftsmen Reviews
+  const fetchingReviews = () => {
+    axios.get(`http://trusty.local/reviews/${id}`)
+    .then(res => setReviews(res.data.data))
+  }
+  useEffect(()=>{
+    fetchCraftsmenDetails()
+  },[id]);
+
+
+
   return (
     <div className="work">
       <Navbar></Navbar>
@@ -21,41 +55,35 @@ const WorkProfile = () => {
             <button>kontaktieren</button>
           </div>
           <img src={userphoto} alt="" />
-          <p className="name">Lukas Bergmann</p>
-          <p className="work-domain">Painter , 23</p>
+          <p className="name">{craftsmen.full_name}</p>
+          <p className="work-domain">{craftsmen.craft}</p>
           <div className="details-worker">
             <button className="type">PERSONAL</button>
             <p className="first">
-              <strong>Adresse:</strong> musterstraße 01, musterstadt
+              <strong>Adresse:</strong> {craftsmen.address}
             </p>
             <p className="header-second">Beschreibung </p>
             <p className="thrid">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet, consetetur sadipscing elitr, sed diam nonumy.
+              {craftsmen.description}
             </p>
             <p></p>
           </div>
           <div className="details-worker">
             <button className="type">REVIEWS</button>
-            <p className="first">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonly used to demonstrate the visual form of a document or
-              a typeface without relying on meaningful content.
-            </p>
-            <p className="header-second">Beschreibung </p>
-            <p className="thrid">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet, consetetur sadipscing elitr, sed diam nonumy.
-            </p>
-            <p></p>
+            {reviews && 
+              reviews.map(review=>{
+                return(
+                  <>
+                    <p className="header-second">Beschreibung </p>
+                    <p className="thrid">
+                      {review.body}
+                    </p>
+                    <hr />
+                    <p></p>
+                  </>
+                )
+              })
+            }
           </div>
         </div>
       </div>

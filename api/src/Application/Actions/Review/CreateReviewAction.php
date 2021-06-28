@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Application\Actions\Review;
 
-use App\Domain\Review\Review;
+use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class CreateReviewAction extends ReviewAction
@@ -17,10 +17,16 @@ class CreateReviewAction extends ReviewAction
 
         $craftsman = $this->craftsmanRepository->findCraftsmanOfId($craftsmanId);
 
+        if (!$this->isCustomer()) {
+            throw new Exception('Unauthorized');
+        }
+
+        $userId = $this->getAuthCustomer()->id;
+
         $data = $this->getFormData();
 
         $data['to_id'] = $craftsmanId;
-        $data['from_id'] = 1; // TODO should be auth()->id()
+        $data['from_id'] = $userId;
 
         $review = $this->reviewRepository->store($data);
 

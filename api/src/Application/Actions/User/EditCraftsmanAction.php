@@ -15,7 +15,6 @@ class EditCraftsmanAction extends CraftsmanAction
     {
         $data = $this->getFormData();
 
-
         if (!$this->isCraftsman()) {
             throw new Exception('Unauthorized');
         }

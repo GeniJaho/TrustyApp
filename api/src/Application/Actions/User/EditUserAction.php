@@ -5,8 +5,6 @@ namespace App\Application\Actions\User;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\App;
-use Slim\Factory\AppFactory;
 
 class EditUserAction extends UserAction
 {

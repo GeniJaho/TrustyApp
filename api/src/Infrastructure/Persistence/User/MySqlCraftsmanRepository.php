@@ -20,6 +20,19 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
             ->toArray();
     }
 
+    public function search(string $query, ?string $sort, ?bool $ascending): array
+    {
+        return Craftsman::where('username', 'like', "%$query%")
+            ->orWhere('full_name', 'like', "%$query%")
+            ->orWhere('craft', 'like', "%$query%")
+            ->orWhere('language', 'like', "%$query%")
+            ->orWhere('address', 'like', "%$query%")
+            ->orderBy($sort, $ascending ? 'asc' : 'desc')
+            ->get()
+            ->values()
+            ->toArray();
+    }
+
     /**
      * {@inheritdoc}
      */

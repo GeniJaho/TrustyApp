@@ -122,4 +122,38 @@ abstract class Action
                     ->withHeader('Content-Type', 'application/json')
                     ->withStatus($payload->getStatusCode());
     }
+
+
+    protected function isCustomer()
+    {
+        $token = $this->request->getAttribute("token");
+
+        if (empty($token) || empty($token['user_id'])) {
+            return false;
+        }
+
+        return strpos($token['user_id'], 'customer') === 0;
+    }
+
+    protected function isCraftsman()
+    {
+        $token = $this->request->getAttribute("token");
+
+        if (empty($token) || empty($token['user_id'])) {
+            return false;
+        }
+
+        return strpos($token['user_id'], 'craftsman') === 0;
+    }
+
+    protected function isGuest()
+    {
+        $token = $this->request->getAttribute("token");
+
+        if (empty($token) || empty($token['user_id'])) {
+            return true;
+        }
+
+        return false;
+    }
 }

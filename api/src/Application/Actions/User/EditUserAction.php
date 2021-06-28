@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace App\Application\Actions\User;
 
+use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
+use Slim\App;
+use Slim\Factory\AppFactory;
 
 class EditUserAction extends UserAction
 {
@@ -14,7 +17,11 @@ class EditUserAction extends UserAction
     {
         $data = $this->getFormData();
 
-        $userId = (int) $this->resolveArg('id');
+        if (!$this->isCustomer()) {
+            throw new Exception('Unauthorized');
+        }
+
+        $userId = $this->getAuthCustomer()->id;
 
         $user = $this->userRepository->update($userId, $data);
 

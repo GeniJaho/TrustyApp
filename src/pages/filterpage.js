@@ -5,11 +5,12 @@ import userphoto from "../assets/Rectangle15.png";
 import tower1 from "../assets/Rectangle55.png";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-const Filter = () => {
+const Filter = ({ auth }) => {
   // Variables
   const [craftsmen, setCraftsmen] = useState([]);
-
+  const history = useHistory();
 
   // No Filter Craftsmen
   const fetchCraftsmen = () => {
@@ -20,6 +21,14 @@ const Filter = () => {
   const filterCraftsmen = filterName => {
     axios.get(`http://trusty.local/craftsmen?sort=${filterName}&order=asc`)
     .then(res => setCraftsmen(res.data.data))
+  }
+  // Push to Craftsmen Details
+  const craftsmenDetails = id => {
+    if (auth) {
+      history.push(`/work/${id}`)
+    }else{
+      alert('Please Login/Sign Up!')
+    }
   }
   // Page load 
   useEffect(()=>{
@@ -73,7 +82,7 @@ const Filter = () => {
           {craftsmen.map(craftsman=>{
             return(
           <div className="filter-values">
-            <div className="value">
+            <div onClick={()=> craftsmenDetails(craftsman.id)} className="value">
               <p className="name">{craftsman.full_name}</p>
               <p className="gender">{craftsman.craft}</p>
               <div className="reviews">

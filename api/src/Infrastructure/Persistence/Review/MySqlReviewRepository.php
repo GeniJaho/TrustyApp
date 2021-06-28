@@ -35,7 +35,7 @@ class MySqlReviewRepository implements ReviewRepository
 
     public function store(array $data): Review
     {
-        return new Review([
+        return Review::create([
             'body' => $data['body'],
             'rating' => $data['rating'],
             'from_id' => $data['from_id'],

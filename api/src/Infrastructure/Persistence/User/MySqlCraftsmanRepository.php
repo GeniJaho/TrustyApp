@@ -34,17 +34,24 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
         return $craftsman;
     }
 
+
+    public function findCraftsmanOfUsername(string $username): ?Craftsman
+    {
+        return Craftsman::whereUsername($username)->first();
+    }
+
     public function store(array $data): Craftsman
     {
         return Craftsman::create([
             'username' => $data['username'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
             'full_name' => $data['full_name'],
             'price' => $data['price'],
             'address' => $data['address'] ?? '',
             'craft' => $data['craft'] ?? '',
             'language' => $data['language'] ?? '',
             'description' => $data['description'] ?? '',
-            'rating' => $data['rating'] ?? null
+            'rating' => $data['rating'] ?? 0
         ]);
     }
 

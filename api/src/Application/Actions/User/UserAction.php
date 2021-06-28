@@ -24,4 +24,20 @@ abstract class UserAction extends Action
         parent::__construct($logger);
         $this->userRepository = $userRepository;
     }
+
+    /**
+     * @throws \App\Domain\User\UserNotFoundException
+     */
+    protected function getAuthCustomer()
+    {
+        if ($this->isGuest()) {
+            return null;
+        }
+
+        $token = $this->request->getAttribute("token");
+
+        $userId = (int) substr($token['user_id'], 8);
+
+        return $this->userRepository->findUserOfId($userId);
+    }
 }

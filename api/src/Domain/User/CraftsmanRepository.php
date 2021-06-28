@@ -18,6 +18,12 @@ interface CraftsmanRepository
     public function findCraftsmanOfId(int $id): Craftsman;
 
     /**
+     * @param string $username
+     * @return Craftsman
+     */
+    public function findCraftsmanOfUsername(string $username): ?Craftsman;
+
+    /**
      * @param array $data
      * @return Craftsman
      */

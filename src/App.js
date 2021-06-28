@@ -6,12 +6,9 @@ import UserProfile from "./pages/userprofile";
 import WorkProfile from "./pages/workprofile";
 import Filter from "./pages/filterpage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useState } from "react";
 import Footer from "./components/Footer";
 
 function App() {
-  const [auth, setAuth] = useState(false);
-  console.log(auth);
   return (
     <div className="App">
       <BrowserRouter>
@@ -20,11 +17,11 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/home" component={Home}></Route>
           <Route path="/about" component={About}></Route>
-          <Route path="/work" component={WorkProfile}></Route>
-          <Route path="/filter" component={Filter}></Route>
-          <Route path="/user"><UserProfile auth={auth} /></Route>
+          <Route path="/work/:id" component={WorkProfile}></Route>
+          <Route path="/filter" ><Filter/></Route>
+          <Route path="/user"><UserProfile/></Route>
         </Switch>
-        <Footer setAuth={setAuth} auth={auth} />
+        <Footer/>
       </BrowserRouter>
     </div>
   );

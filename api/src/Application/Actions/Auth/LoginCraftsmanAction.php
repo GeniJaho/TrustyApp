@@ -7,7 +7,7 @@ use App\Domain\User\UserNotFoundException;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class LoginUserAction extends AuthAction
+class LoginCraftsmanAction extends AuthAction
 {
     /**
      * {@inheritdoc}
@@ -24,18 +24,18 @@ class LoginUserAction extends AuthAction
             throw new Exception("Required fields are missing.");
         }
 
-        $user = $this->userRepository->findUserOfUsername($data['username']);
+        $craftsman = $this->craftsmanRepository->findCraftsmanOfUsername($data['username']);
 
-        if (!$user) {
+        if (!$craftsman) {
             throw new UserNotFoundException();
         }
 
-        if (!password_verify($data['password'], $user->password)) {
+        if (!password_verify($data['password'], $craftsman->password)) {
             throw new Exception("Your password is incorrect.");
         }
 
-        $token = $this->createCustomerToken($user);
+        $token = $this->createCraftsmanToken($craftsman);
 
-        return $this->respondWithData(['user' => $user, 'token' => $token]);
+        return $this->respondWithData(['craftsman' => $craftsman, 'token' => $token]);
     }
 }

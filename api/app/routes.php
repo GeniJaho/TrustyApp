@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\Auth\LoginCraftsmanAction;
 use App\Application\Actions\Auth\LoginUserAction;
+use App\Application\Actions\Auth\RegisterCraftsmanAction;
 use App\Application\Actions\Auth\RegisterUserAction;
 use App\Application\Actions\Review\CreateReviewAction;
 use App\Application\Actions\Review\DeleteReviewAction;
@@ -39,12 +41,14 @@ return function (App $app) {
 
     $app->group('/craftsmen', function (Group $group) {
         $group->get('', ListCraftsmenAction::class);
-        $group->get('/{id}', ViewCraftsmanAction::class);
-        $group->patch('/{id}', EditCraftsmanAction::class)
+        $group->patch('', EditCraftsmanAction::class)
             ->add(new JwtAuthentication([
                 'secret' => $_ENV['JWT_SECRET'],
                 'secure' => false
             ]));
+        $group->post('/login', LoginCraftsmanAction::class);
+        $group->post('/register', RegisterCraftsmanAction::class);
+        $group->get('/{id}', ViewCraftsmanAction::class);
     });
 
     $app->group('/reviews', function (Group $group) {

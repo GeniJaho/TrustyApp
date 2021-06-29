@@ -23,16 +23,22 @@ const Signin = () => {
     axios.post('http://trusty.local/users/login',{
       username: data.username,
       password: data.password
-    }).then(res=> sessionStorage.setItem('user', JSON.stringify(res.data.data)))
+    }).then(res=> {
+      sessionStorage.setItem('user', JSON.stringify(res.data.data))
+      sessionStorage.setItem('userType', 'customer');
+    })
     .then(()=> history.push('/home'))
     .catch(err=> alert(err.message))
   }
-    // User Login
+    // Craftsmen Login
     const craftsmenLogin = data => {
       axios.post('http://trusty.local/craftsmen/login',{
         username: data.username,
         password: data.password
-      }).then(res=> sessionStorage.setItem('craftsmen', JSON.stringify(res.data.data)))
+      }).then(res=> {
+        sessionStorage.setItem('craftsmen', JSON.stringify(res.data.data))
+        sessionStorage.setItem('userType', 'craftsmen')
+      })
       .then(()=> history.push('/home'))
       .catch(err=> alert(err.message))
     }

@@ -32,7 +32,10 @@ const Signup = () => {
       username: data.username,
       password: data.password,
       conf_password: data.conf_password
-    }).then(res=> sessionStorage.setItem('user', JSON.stringify(res.data.data)))
+    }).then(res=> {
+      sessionStorage.setItem('user', JSON.stringify(res.data.data))
+      sessionStorage.setItem('userType', 'customer');
+    })
     .then(()=> history.push('/home'))
     .catch(err=> alert(err.message))
   }
@@ -48,7 +51,10 @@ const Signup = () => {
       language: data.language,
       address: data.address,
       description: data.description
-    }).then(res=> sessionStorage.setItem('craftsmen', JSON.stringify(res.data.data)))
+    }).then(res=> {
+      sessionStorage.setItem('craftsmen', JSON.stringify(res.data.data))
+      sessionStorage.setItem('userType', 'craftsmen')
+    })
     .then(()=> history.push('/home'))
     .catch(err=> alert(err.message))
   }

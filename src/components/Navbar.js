@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/trustylogo.png";
 import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [userType, setUserType] = useState('');
+
+
+  useEffect(()=>{
+    const tempUser = sessionStorage.getItem('userType');
+    setUserType(tempUser)
+  },[])
   return (
     <div className="navbar">
       <nav>
@@ -34,27 +41,29 @@ const Navbar = () => {
             <li>Suchen</li>
           </NavLink>
 
+          { userType === 'customer'? 
           <NavLink
             to="/user"
             activeStyle={{
               fontWeight: "bold",
               color: "#298da6",
             }}
-            style={{ textDecoration: "none", color: "#000000" }}
-          >
+            style={{ textDecoration: "none", color: "#000000" }}>
             <li>Kunden Profil</li>
-          </NavLink>
+          </NavLink> : null
+          }
 
+          { userType === 'craftsmen'?
           <NavLink
             to="/work"
             activeStyle={{
               fontWeight: "bold",
               color: "#298da6",
             }}
-            style={{ textDecoration: "none", color: "#000000" }}
-          >
+            style={{ textDecoration: "none", color: "#000000" }}>
             <li>Handwerker Profil</li>
-          </NavLink>
+          </NavLink> : null
+          }
 
           <NavLink
             to="/about"

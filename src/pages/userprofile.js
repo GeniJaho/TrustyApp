@@ -14,6 +14,8 @@ const UserProfile = () => {
   const [jwtToken, setJwtToken] = useState('');
   const [userID, setUserID] = useState(0);
   const [modalDisplayName, setModalDisplayName] = useState(false);
+  const [modalUsername, setModalUsername] = useState(false);
+
   const [patchInputValue, setPatchInputValue] = useState('');
   // Fething user Data
   const fetchUserData = () => {
@@ -28,14 +30,35 @@ const UserProfile = () => {
   // User Display Name Patch Function
   const patchDisplayName = () => {
     if (patchInputValue) {
-      
-      axios.patch(`http://trusty.local/users/${userID}`,{
+      axios.patch(`http://trusty.local/users`,{
         full_name: patchInputValue
+      },{
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          // 'content-type': "application/json"
+          
+        }
       }).then(res=> {console.log(res);setModalDisplayName(false)})
       return
     }
     alert('Display Name Can Not be Empty!')
   } 
+  // User Username Patch Function
+  const patchUsername = () => {
+    if (patchInputValue) {
+      axios.patch(`http://trusty.local/users`,{
+        username: patchInputValue
+      },{
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+          
+        }
+      }).then(res=> {console.log(res);setModalUsername(false)})
+      .catch(err => alert(err.message))
+      return
+    }
+    alert('Display Name Can Not be Empty!')
+  }
   useEffect(()=>{
     fetchUserData()
   },[])
@@ -78,7 +101,7 @@ const UserProfile = () => {
               <p className="email-one">User Name</p>
               <div className="email-part">
                 <p>{userName}</p>
-                <button>Edit</button>
+                <button onClick={()=> setModalUsername(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
@@ -102,6 +125,12 @@ const UserProfile = () => {
         <input value={patchInputValue} onChange={e => setPatchInputValue(e.target.value)} placeholder='Your New Display Name' className='modal-input' type="text" /><br />
         <button className='modal-close' onClick={()=> setModalDisplayName(false)}>Close</button>
         <button className='modal-save' onClick={()=> patchDisplayName()}>Save Changes</button>
+      </Modal>
+      <Modal isOpen={modalUsername} onRequestClose={()=> setModalUsername(false)} >
+        <h1 className='modal-h1'>Edit Username</h1>
+        <input value={patchInputValue} onChange={e => setPatchInputValue(e.target.value)} placeholder='Your New Username' className='modal-input' type="text" /><br />
+        <button className='modal-close' onClick={()=> setModalUsername(false)}>Close</button>
+        <button className='modal-save' onClick={()=> patchUsername()}>Save Changes</button>
       </Modal>
     </div>
   );

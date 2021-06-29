@@ -53,8 +53,16 @@ return function (App $app) {
 
     $app->group('/reviews', function (Group $group) {
         $group->get('/{craftsmanId}', ListReviewsAction::class);
-        $group->post('/{craftsmanId}', CreateReviewAction::class);
+        $group->post('/{craftsmanId}', CreateReviewAction::class)
+            ->add(new JwtAuthentication([
+                'secret' => $_ENV['JWT_SECRET'],
+                'secure' => false
+            ]));
         $group->get('/{craftsmanId}/{id}', ViewReviewAction::class);
-        $group->delete('/{craftsmanId}/{id}', DeleteReviewAction::class);
+        $group->delete('/{craftsmanId}/{id}', DeleteReviewAction::class)
+            ->add(new JwtAuthentication([
+                'secret' => $_ENV['JWT_SECRET'],
+                'secure' => false
+            ]));
     });
 };

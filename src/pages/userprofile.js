@@ -34,15 +34,23 @@ const UserProfile = () => {
         full_name: patchInputValue
       },{
         headers: {
-          Authorization: `Bearer ${jwtToken}`,
-          // 'content-type': "application/json"
-          
+          Authorization: `Bearer ${jwtToken}`
         }
-      }).then(res=> {console.log(res);setModalDisplayName(false)})
+      }).then(res=>{
+        let tempUser = sessionStorage.getItem('user');
+        tempUser = JSON.parse(tempUser);
+        tempUser.user.full_name = res.data.data.full_name
+        setFullName(tempUser.user.full_name)
+        sessionStorage.setItem('user', JSON.stringify(tempUser))
+        setModalDisplayName(false)
+        setPatchInputValue('')
+      })
+      .catch(err=> alert(err.message))
       return
     }
     alert('Display Name Can Not be Empty!')
   } 
+
   // User Username Patch Function
   const patchUsername = () => {
     if (patchInputValue) {
@@ -53,7 +61,15 @@ const UserProfile = () => {
           Authorization: `Bearer ${jwtToken}`
           
         }
-      }).then(res=> {console.log(res);setModalUsername(false)})
+      }).then(res=>{
+        let tempUser = sessionStorage.getItem('user');
+        tempUser = JSON.parse(tempUser);
+        tempUser.user.username = res.data.data.username
+        setUserName(tempUser.user.username)
+        sessionStorage.setItem('user', JSON.stringify(tempUser))
+        setModalUsername(false)
+        setPatchInputValue('')
+      })
       .catch(err => alert(err.message))
       return
     }

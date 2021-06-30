@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -18,14 +19,14 @@ const WorkProfile = () => {
     })
   }
   // Post Comment
-  const postComment = () => {
-    axios.post(`http://trusty.local/reviews/${id}`,{
-      body: 'Some Text',
-      rating: 1,
-      from_id: 1,
-      to_id: id,
-    }).then(()=> alert("Review Submitted Successfully!"))
-  }
+  // const postComment = () => {
+  //   axios.post(`http://trusty.local/reviews/${id}`,{
+  //     body: 'Some Text',
+  //     rating: 1,
+  //     from_id: 1,
+  //     to_id: id,
+  //   }).then(()=> alert("Review Submitted Successfully!"))
+  // }
   // Getting Craftsmen Reviews
   const fetchingReviews = () => {
     axios.get(`http://trusty.local/reviews/${id}`)
@@ -73,14 +74,14 @@ const WorkProfile = () => {
             {reviews && 
               reviews.map(review=>{
                 return(
-                  <>
+                  <section key={review.id}>
                     <p className="header-second">Beschreibung </p>
                     <p className="thrid">
                       {review.body}
                     </p>
                     <hr />
                     <p></p>
-                  </>
+                  </section>
                 )
               })
             }

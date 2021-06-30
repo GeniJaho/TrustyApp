@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class ListCraftsmenAction extends CraftsmanAction
 {
-    /**
+    /** 
      * {@inheritdoc}
      */
     protected function action(): Response

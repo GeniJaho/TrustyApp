@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable*/
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/trustylogo.png";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -75,6 +76,13 @@ const Signin = () => {
     )
   }  
 
+  // Page On Load Function
+  useEffect(()=>{
+    const tempUser = sessionStorage.getItem('userType');
+    if (tempUser) {
+      history.push('/home')
+    }
+  },[])
   return (
     <div className="signin">
       <div className="inner-div">

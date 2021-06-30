@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import axios from "axios";
+import { useEffect } from "react";
 
 const schemaCraftsman = yup.object().shape({
   full_name: yup.string().required('Full Name is required!'),
@@ -85,6 +86,14 @@ const CraftsmanSignup = () => {
     </div>
     )
   }
+
+  // Page On Load Function
+  useEffect(()=>{
+    const tempUser = sessionStorage.getItem('userType');
+    if (tempUser) {
+      history.push('/home')
+    }
+  },[])
   return (
     <div className="signin">
       {craftsmenSignup()}

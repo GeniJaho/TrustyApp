@@ -4,12 +4,15 @@ import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [userType, setUserType] = useState('');
-
+  const [loginDisplay, setLoginDisplay] = useState('initial')
 
   useEffect(()=>{
     const tempUser = sessionStorage.getItem('userType');
     setUserType(tempUser)
-  },[])
+    if (userType) {
+      setLoginDisplay('none')
+    }
+  },[userType])
   return (
     <div className="navbar">
       <nav>
@@ -78,7 +81,7 @@ const Navbar = () => {
 
         </ul>
 
-        <div className="nav-button">
+        <div style={{display: `${loginDisplay}`}} className="nav-button">
           <Link to="/signup">
             <button>Registrieren</button>
           </Link>

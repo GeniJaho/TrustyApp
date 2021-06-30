@@ -6,6 +6,7 @@ import pencil from "../assets/pencil.png";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import Modal from 'react-modal';
+import { useHistory } from "react-router-dom";
 
 const UserProfile = () => {
   // Variables
@@ -15,6 +16,7 @@ const UserProfile = () => {
   const [userID, setUserID] = useState(0);
   const [modalDisplayName, setModalDisplayName] = useState(false);
   const [modalUsername, setModalUsername] = useState(false);
+  const history = useHistory();
 
   const [patchInputValue, setPatchInputValue] = useState('');
   // Fething user Data
@@ -26,6 +28,14 @@ const UserProfile = () => {
     setFullName(tempUser.user.full_name);
     setUserName(tempUser.user.username);
   }
+
+
+  // User Logout 
+  const userLogout = () => {
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('userType')
+    history.push('/')
+  } 
 
   // User Display Name Patch Function
   const patchDisplayName = () => {
@@ -122,7 +132,7 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="sign-out">
-            <button className="signout">Abmelden</button>
+            <button onClick={()=> userLogout()} className="signout">Abmelden</button>
           </div>
         </div>
         <div className="tower2">

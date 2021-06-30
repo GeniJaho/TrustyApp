@@ -40,7 +40,7 @@ const CraftsmanSignup = () => {
       sessionStorage.setItem('userType', 'craftsmen')
     })
     .then(()=> history.push('/home'))
-    .catch(err=> alert(err.message))
+    .catch(err=> alert(err.response.data.error.description))
   }
   const craftsmenSignup = () => {
     return(

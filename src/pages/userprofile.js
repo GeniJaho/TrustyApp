@@ -45,7 +45,7 @@ const UserProfile = () => {
         setModalDisplayName(false)
         setPatchInputValue('')
       })
-      .catch(err=> alert(err.message))
+      .catch(err=> alert(err.response.data.error.description))
       return
     }
     alert('Display Name Can Not be Empty!')
@@ -70,7 +70,7 @@ const UserProfile = () => {
         setModalUsername(false)
         setPatchInputValue('')
       })
-      .catch(err => alert(err.message))
+      .catch(err=> alert(err.response.data.error.description))
       return
     }
     alert('Display Name Can Not be Empty!')
@@ -118,13 +118,6 @@ const UserProfile = () => {
               <div className="email-part">
                 <p>{userName}</p>
                 <button onClick={()=> setModalUsername(true)}>Edit</button>
-              </div>
-            </div>
-            <div className="email">
-              <p className="email-one">Password</p>
-              <div className="email-part">
-                <p>. . . . . .</p>
-                <button>Edit</button>
               </div>
             </div>
           </div>

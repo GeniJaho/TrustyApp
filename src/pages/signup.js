@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import Logo from "../assets/trustylogo.png";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import axios from "axios";
 
-const schema = yup.object().shape({
+const schemaUser = yup.object().shape({
   full_name: yup.string().required('Full Name is required!'),
   username: yup.string().required('Username is required!'),
   password: yup.string().min(8, 'Password must be at least 8 characters!').max(20, 'Password must be at most 20 characters!').required('Password is required!'),
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 const Signup = () => {
   // Variables
   const { register, handleSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schemaUser)
   });
   const history = useHistory();
   // User Register
@@ -31,7 +31,7 @@ const Signup = () => {
       sessionStorage.setItem('userType', 'customer');
     })
     .then(()=> history.push('/home'))
-    .catch(err=> alert(err.message))
+    .catch(err=> alert(err.response.data.error.description))
   }
 
   const userSignup = () => {

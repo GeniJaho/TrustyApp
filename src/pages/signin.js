@@ -28,7 +28,7 @@ const Signin = () => {
       sessionStorage.setItem('userType', 'customer');
     })
     .then(()=> history.push('/home'))
-    .catch(err=> alert(err.message))
+    .catch(err=> alert(err.response.data.error.description))
   }
     // Craftsmen Login
     const craftsmenLogin = data => {
@@ -40,7 +40,7 @@ const Signin = () => {
         sessionStorage.setItem('userType', 'craftsmen')
       })
       .then(()=> history.push('/home'))
-      .catch(err=> alert(err.message))
+      .catch(err=> alert(err.response.data.error.description))
     }
   // User Signin
   const userSignin = () => {
@@ -90,7 +90,7 @@ const Signin = () => {
               <span>Signup</span>
             </Link>
           </p>
-          {toggleLogin ? <button onClick={()=> setToggleLogin(!toggleLogin)}>Login as a Customer</button> : <button onClick={()=> setToggleLogin(!toggleLogin)}>Login as a Craftsmen</button>}
+          {toggleLogin ? <button onClick={()=> setToggleLogin(!toggleLogin)}>Login as a Customer</button> : <button onClick={()=> setToggleLogin(!toggleLogin)}>Login as a Craftsman</button>}
         </div>
       </div>
     </div>

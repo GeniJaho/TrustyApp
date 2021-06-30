@@ -17,6 +17,9 @@ const Footer = () => {
     else if(location.pathname === '/signup'){
       setDisplay('none');
     }
+    else if(location.pathname === '/craftsman/signup'){
+      setDisplay('none');
+    }
     else{
       setDisplay('initial');
     }

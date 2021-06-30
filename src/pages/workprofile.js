@@ -16,7 +16,7 @@ const WorkProfile = () => {
     .then(res => {
       setCraftsmen(res.data.data);
       fetchingReviews();
-    })
+    }).catch(err=> alert(err.response.data.error.description))
   }
   // Post Comment
   // const postComment = () => {
@@ -27,10 +27,12 @@ const WorkProfile = () => {
   //     to_id: id,
   //   }).then(()=> alert("Review Submitted Successfully!"))
   // }
+
   // Getting Craftsmen Reviews
   const fetchingReviews = () => {
     axios.get(`http://trusty.local/reviews/${id}`)
     .then(res => setReviews(res.data.data))
+    .catch(err=> alert(err.response.data.error.description))
   }
   useEffect(()=>{
     fetchCraftsmenDetails()

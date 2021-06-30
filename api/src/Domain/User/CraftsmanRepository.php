@@ -11,6 +11,11 @@ interface CraftsmanRepository
     public function findAll(?string $sort, ?bool $ascending): array;
 
     /**
+     * @return Craftsman[]
+     */
+    public function search(string $query, ?string $sort, ?bool $ascending): array;
+
+    /**
      * @param int $id
      * @return Craftsman
      * @throws UserNotFoundException

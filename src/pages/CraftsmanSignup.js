@@ -48,7 +48,7 @@ const CraftsmanSignup = () => {
       <div className="top-signup">
       <img src={Logo} alt="" />
       <p className="signup-title">Craftsmen Sign up</p>
-      <form onSubmit={()=>handleSubmit(craftsmenRegister()) }>
+      <form onSubmit={handleSubmit(craftsmenRegister)}>
         <input type="text"  placeholder="Full Name" {...register('full_name')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.full_name?.message}</p>
 

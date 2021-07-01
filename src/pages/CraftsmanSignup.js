@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Logo from "../assets/trustylogo.png";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -37,8 +38,8 @@ const CraftsmanSignup = () => {
       address: data.address,
       description: data.description
     }).then(res=> {
-      sessionStorage.setItem('craftsmen', JSON.stringify(res.data.data))
-      sessionStorage.setItem('userType', 'craftsmen')
+      sessionStorage.setItem('craftsman', JSON.stringify(res.data.data))
+      sessionStorage.setItem('userType', 'craftsman')
     })
     .then(()=> history.push('/home'))
     .catch(err=> alert(err.response.data.error.description))

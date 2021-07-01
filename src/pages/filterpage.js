@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Filter = ({ auth }) => {
+const Filter = () => {
   // Variables
   const [craftsmen, setCraftsmen] = useState([]);
   const history = useHistory();
@@ -24,11 +24,7 @@ const Filter = ({ auth }) => {
   }
   // Push to Craftsmen Details
   const craftsmenDetails = id => {
-    if (auth) {
       history.push(`/work/${id}`)
-    }else{
-      alert('Please Login/Sign Up!')
-    }
   }
   // Page load 
   useEffect(()=>{

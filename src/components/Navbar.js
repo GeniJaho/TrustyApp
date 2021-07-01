@@ -56,9 +56,9 @@ const Navbar = () => {
           </NavLink> : null
           }
 
-          { userType === 'craftsmen'?
+          { userType === 'craftsman'?
           <NavLink
-            to="/work"
+            to="/craftsman/profile"
             activeStyle={{
               fontWeight: "bold",
               color: "#298da6",

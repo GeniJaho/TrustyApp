@@ -37,8 +37,8 @@ const Signin = () => {
         username: data.username,
         password: data.password
       }).then(res=> {
-        sessionStorage.setItem('craftsmen', JSON.stringify(res.data.data))
-        sessionStorage.setItem('userType', 'craftsmen')
+        sessionStorage.setItem('craftsman', JSON.stringify(res.data.data))
+        sessionStorage.setItem('userType', 'craftsman')
       })
       .then(()=> history.push('/home'))
       .catch(err=> alert(err.response.data.error.description))

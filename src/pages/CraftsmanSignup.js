@@ -80,7 +80,7 @@ const CraftsmanSignup = () => {
          border: '1px solid #000000',
          outline: 'none',
          padding: '15px',
-         resize: 'vertical'}} placeholder='Craft Description' {...register('description')}></textarea><br />
+         resize: 'vertical'}} placeholder='Craft Description. Please include your phone number.' {...register('description')}></textarea><br />
 
         <input  style={{backgroundColor: 'skyBlue', fontSize: '18px'}} type="submit" value='Register' />
       </form>

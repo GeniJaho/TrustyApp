@@ -26,7 +26,7 @@ const Filter = () => {
   const craftsmenDetails = id => {
       history.push(`/work/${id}`)
   }
-  // Page load 
+  // Page load
   useEffect(()=>{
     fetchCraftsmen();
   },[])
@@ -77,7 +77,7 @@ const Filter = () => {
           </div>
           {craftsmen.map(craftsman=>{
             return(
-          <div className="filter-values">
+          <div className="filter-values" key={craftsman.id}>
             <div onClick={()=> craftsmenDetails(craftsman.id)} className="value">
               <p className="name">{craftsman.full_name}</p>
               <p className="gender">{craftsman.craft}</p>

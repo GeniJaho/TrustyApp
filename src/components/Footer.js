@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation();
   const [display, setDisplay] = useState('none');
-   
+
   useEffect(()=>{
     if (location.pathname === '/') {
       setDisplay('none');
@@ -34,7 +34,7 @@ const Footer = () => {
         without relying on meaningful content. Lorem ipsum may be used as a
         plant.
       </p>
-      <div className="social-links">
+      <div className="social-links flex flex-row">
         <img src={twitter} alt="" />
         <img src={insta} alt="" />
 

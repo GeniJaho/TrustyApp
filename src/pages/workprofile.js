@@ -146,6 +146,21 @@ const WorkProfile = () => {
                       />
                     </div>
 
+                    <div className="mt-3 w-48">
+                      <label htmlFor="rating" className="sr-only">
+                        Rating
+                      </label>
+                      <input
+                          type="number"
+                          min="1"
+                          max="5"
+                          name="rating"
+                          id="rating"
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                          placeholder="Rate from 1-5"
+                      />
+                    </div>
+
                     <div className="mt-3 flex items-center justify-between">
                       <button
                           type="submit"

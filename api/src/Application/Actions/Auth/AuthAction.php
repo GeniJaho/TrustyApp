@@ -15,7 +15,6 @@ use ReallySimpleJWT\Token;
 abstract class AuthAction extends Action
 {
     use AuthorizesUsers;
-
     protected UserRepository $userRepository;
     protected CraftsmanRepository $craftsmanRepository;
 

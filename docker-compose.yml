@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
 
-  react-prod:
-    container_name: react-prod
+  trusty_v3-prod:
+    container_name: trusty_v3-prod
     build:
       context: .
       dockerfile: Dockerfile.prod

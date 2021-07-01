@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Filter = () => {
+const Filter = ({ auth }) => {
   // Variables
   const [craftsmen, setCraftsmen] = useState([]);
   const history = useHistory();

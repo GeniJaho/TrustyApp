@@ -67,3 +67,4 @@ trait AuthorizesUsers
         return false;
     }
 }
+

@@ -17,8 +17,8 @@ const UserProfile = () => {
   const [modalDisplayName, setModalDisplayName] = useState(false);
   const [modalUsername, setModalUsername] = useState(false);
   const history = useHistory();
-
   const [patchInputValue, setPatchInputValue] = useState('');
+  
   // Fething user Data
   const fetchUserData = () => {
     let tempUser = sessionStorage.getItem('user');
@@ -28,7 +28,6 @@ const UserProfile = () => {
     setFullName(tempUser.user.full_name);
     setUserName(tempUser.user.username);
   }
-
 
   // User Logout 
   const userLogout = () => {
@@ -85,6 +84,7 @@ const UserProfile = () => {
     }
     alert('Display Name Can Not be Empty!')
   }
+
   useEffect(()=>{
     fetchUserData()
   },[])
@@ -145,12 +145,14 @@ const UserProfile = () => {
         <button className='modal-close' onClick={()=> setModalDisplayName(false)}>Close</button>
         <button className='modal-save' onClick={()=> patchDisplayName()}>Save Changes</button>
       </Modal>
+
       <Modal isOpen={modalUsername} onRequestClose={()=> setModalUsername(false)} >
         <h1 className='modal-h1'>Edit Username</h1>
         <input value={patchInputValue} onChange={e => setPatchInputValue(e.target.value)} placeholder='Your New Username' className='modal-input' type="text" /><br />
         <button className='modal-close' onClick={()=> setModalUsername(false)}>Close</button>
         <button className='modal-save' onClick={()=> patchUsername()}>Save Changes</button>
       </Modal>
+
     </div>
   );
 };

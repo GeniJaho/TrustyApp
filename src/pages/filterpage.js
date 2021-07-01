@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Down from "../assets/arrowdown.png";
-import Stars from "../assets/stars.png";
+import Star from "../assets/star.png";
 import userphoto from "../assets/Rectangle15.png";
 import tower1 from "../assets/Rectangle55.png";
 import Navbar from "../components/Navbar";
@@ -94,7 +94,7 @@ const Filter = ({ auth }) => {
               <p className="name">{craftsman.full_name}</p>
               <p className="gender">{craftsman.craft}</p>
               <div className="reviews">
-                <img src={Stars} alt="" />
+                <img src={Star} alt="" />
                 <p className="filter-type">Bewertungen {craftsman.rating}</p>
               </div>
               <p>

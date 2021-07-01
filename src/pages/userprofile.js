@@ -39,7 +39,7 @@ const UserProfile = () => {
   // User Display Name Patch Function
   const patchDisplayName = () => {
     if (patchInputValue) {
-      axios.patch(`http://trusty.local/users`,{
+      axios.patch(`${process.env.REACT_APP_BASE_URL}/users`,{
         full_name: patchInputValue
       },{
         headers: {
@@ -63,7 +63,7 @@ const UserProfile = () => {
   // User Username Patch Function
   const patchUsername = () => {
     if (patchInputValue) {
-      axios.patch(`http://trusty.local/users`,{
+      axios.patch(`${process.env.REACT_APP_BASE_URL}/users`,{
         username: patchInputValue
       },{
         headers: {

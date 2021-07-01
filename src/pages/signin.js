@@ -21,7 +21,7 @@ const Signin = () => {
   const history = useHistory();
   // User Login
   const userLogin = data => {
-    axios.post('http://trusty.local/users/login',{
+    axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`,{
       username: data.username,
       password: data.password
     }).then(res=> {
@@ -33,7 +33,7 @@ const Signin = () => {
   }
     // Craftsmen Login
     const craftsmenLogin = data => {
-      axios.post('http://trusty.local/craftsmen/login',{
+      axios.post(`${process.env.REACT_APP_BASE_URL}/craftsmen/login`,{
         username: data.username,
         password: data.password
       }).then(res=> {

@@ -14,12 +14,12 @@ const Filter = ({ auth }) => {
 
   // No Filter Craftsmen
   const fetchCraftsmen = () => {
-    axios.get('http://trusty.local/craftsmen')
+    axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen`)
     .then(res => setCraftsmen(res.data.data))
   }
   // Filtered Craftsmen
   const filterCraftsmen = filterName => {
-    axios.get(`http://trusty.local/craftsmen?sort=${filterName}&order=asc`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen?sort=${filterName}&order=asc`)
     .then(res => setCraftsmen(res.data.data))
   }
   // Push to Craftsmen Details

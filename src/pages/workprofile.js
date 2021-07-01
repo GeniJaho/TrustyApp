@@ -13,7 +13,7 @@ const WorkProfile = () => {
   const [reviews, setReviews] = useState([]);
   // Getting Craftsmen Details
   const fetchCraftsmenDetails = () => {
-    axios.get(`http://trusty.local/craftsmen/${id}`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen/${id}`)
     .then(res => {
       setCraftsmen(res.data.data);
       fetchingReviews();
@@ -32,7 +32,7 @@ const WorkProfile = () => {
 
   // Getting Craftsmen Reviews
   const fetchingReviews = () => {
-    axios.get(`http://trusty.local/reviews/${id}`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/reviews/${id}`)
     .then(res => {setReviews(res.data.data);console.log(reviews)})
     .catch(err=> alert(err.response.data.error.description))
   }

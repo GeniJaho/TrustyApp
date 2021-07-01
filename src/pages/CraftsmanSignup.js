@@ -27,7 +27,7 @@ const CraftsmanSignup = () => {
   const history = useHistory();
   // Craftsmen Register
   const craftsmenRegister = data => {
-    axios.post('http://trusty.local/craftsmen/register',{
+    axios.post(`${process.env.REACT_APP_BASE_URL}/craftsmen/register`,{
       full_name: data.full_name,
       username: data.username,
       password: data.password,

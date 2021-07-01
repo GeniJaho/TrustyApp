@@ -22,7 +22,7 @@ const Signup = () => {
   const history = useHistory();
   // User Register
   const onSubmit = data => {
-    axios.post('http://trusty.local/users/register',{
+    axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`,{
       full_name: data.full_name,
       username: data.username,
       password: data.password,

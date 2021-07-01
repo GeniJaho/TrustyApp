@@ -63,7 +63,7 @@ const CraftsmanProfile = () => {
 
   // Craftsman Profile Patch Function
   const craftsmenPatch = data => {
-    axios.patch('http://trusty.local/craftsmen', {
+    axios.patch(`${process.env.REACT_APP_BASE_URL}/craftsmen`, {
       full_name: data.full_name,
       username: data.username,
       craft: data.craft,

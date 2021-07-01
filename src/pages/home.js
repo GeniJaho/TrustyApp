@@ -3,7 +3,6 @@ import Search from "../assets/search.png";
 import Civil from "../assets/civil.png";
 import Cutter from "../assets/cutter.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -21,15 +20,15 @@ const Home = () => {
         <div className="search-component">
           <p>Finden Sie die</p>
           <p>
-            <span>Perfekte</span> Person fur
+            <span>perfekte</span> Person für
           </p>
-          <p>Ihr Problem</p>
+          <p>ihr Problem</p>
           <div className="search-container">
             <div className="search-tile">
               <img src={Search} alt="" />
               <input type="text" />
             </div>
-            <button>Search</button>
+            <button>Suchen</button>
           </div>
         </div>
       </div>
@@ -53,7 +52,6 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

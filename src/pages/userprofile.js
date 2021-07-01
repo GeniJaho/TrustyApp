@@ -1,11 +1,44 @@
-import React from "react";
+/* eslint-disable*/
+import React, { useEffect, useState } from "react";
 import tower1 from "../assets/Rectangle55.png";
 import userphoto from "../assets/Rectangle15.png";
 import pencil from "../assets/pencil.png";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import axios from "axios";
+import Modal from 'react-modal';
 
 const UserProfile = () => {
+  // Variables
+  const [fullName, setFullName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [jwtToken, setJwtToken] = useState('');
+  const [userID, setUserID] = useState(0);
+  const [modalDisplayName, setModalDisplayName] = useState(false);
+  const [patchInputValue, setPatchInputValue] = useState('');
+  // Fething user Data
+  const fetchUserData = () => {
+    let tempUser = sessionStorage.getItem('user');
+    tempUser = JSON.parse(tempUser);
+    setJwtToken(tempUser.token);
+    setUserID(tempUser.user.id)
+    setFullName(tempUser.user.full_name);
+    setUserName(tempUser.user.username);
+  }
+
+  // User Display Name Patch Function
+  const patchDisplayName = () => {
+    if (patchInputValue) {
+      
+      axios.patch(`http://trusty.local/users/${userID}`,{
+        full_name: patchInputValue
+      }).then(res=> {console.log(res);setModalDisplayName(false)})
+      return
+    }
+    alert('Display Name Can Not be Empty!')
+  } 
+  useEffect(()=>{
+    fetchUserData()
+  },[])
   return (
     <div className="user">
       <Navbar></Navbar>
@@ -31,21 +64,20 @@ const UserProfile = () => {
             <div className="circular-pencil">
               <img src={pencil} alt="" />
             </div>
-            <p className="user-name">Elizabeth 25</p>
-            {/*<button className="tier">Free</button>*/}     
+            <p className="user-name">{fullName}</p>     
           </div>
           <div className="user-detail">
             <div className="email">
               <p className="email-one">Display name</p>
               <div className="email-part">
-                <p>Eli_Zabeth</p>
-                <button>Edit</button>
+                <p>{fullName}</p>
+                <button onClick={()=> setModalDisplayName(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
-              <p className="email-one">Email</p>
+              <p className="email-one">User Name</p>
               <div className="email-part">
-                <p>icaniwilldk@gmail.com</p>
+                <p>{userName}</p>
                 <button>Edit</button>
               </div>
             </div>
@@ -57,14 +89,6 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          {/* <div className="user-plan">
-            <p>Subscriptions</p>
-            <div className="plan-switch">
-              <button>Take Free</button>
-              <button>Upgrade to pro</button>
-            </div>
-            <button className="upgrade">See the Pro Benefits {`->`}</button>
-          </div> */}
           <div className="sign-out">
             <button className="signout">Abmelden</button>
           </div>
@@ -73,7 +97,12 @@ const UserProfile = () => {
           <img src={tower1} alt="" />
         </div>
       </div>
-      <Footer></Footer>
+      <Modal isOpen={modalDisplayName} onRequestClose={()=> setModalDisplayName(false)} >
+        <h1 className='modal-h1'>Edit Display Name</h1>
+        <input value={patchInputValue} onChange={e => setPatchInputValue(e.target.value)} placeholder='Your New Display Name' className='modal-input' type="text" /><br />
+        <button className='modal-close' onClick={()=> setModalDisplayName(false)}>Close</button>
+        <button className='modal-save' onClick={()=> patchDisplayName()}>Save Changes</button>
+      </Modal>
     </div>
   );
 };

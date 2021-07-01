@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/trustylogo.png";
 import facebook from "../assets/facebookwhite.png";
 import twitter from "../assets/twitter.png";
 import insta from "../assets/insta.png";
 import printest from "../assets/printest.png";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+  const [display, setDisplay] = useState('none');
+   
+  useEffect(()=>{
+    if (location.pathname === '/') {
+      setDisplay('none');
+    }
+    else if(location.pathname === '/signup'){
+      setDisplay('none');
+    }
+    else{
+      setDisplay('initial');
+    }
+  },[location])
   return (
-    <div className="footer">
+    <section style={{display: `${display}`}}>
+      <div className="footer">
       <img src={Logo} alt="" className="logo" />
       <p className="about">
         In publishing and graphic design, Lorem ipsum is a placeholder text
@@ -25,6 +41,7 @@ const Footer = () => {
       <hr />
       <p>Copyrights @ 2021. All rights reserved</p>
     </div>
+    </section>
   );
 };
 

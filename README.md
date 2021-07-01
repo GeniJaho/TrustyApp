@@ -68,3 +68,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Setting up the Slim backend
+
+PHP 7.4 and MySql (or MariaDB) required
+
+`cd api`
+
+`composer install`
+
+// check the proper DB connection on `api/phoenix.php`
+
+`php vendor/bin/phoenix migrate`
+
+`php seeder.php`
+
+`composer start`
+
+Now you can access the api on `http://localhost:8080`
+
+Or setup a VirtualHost or Homestead site to point to `api/public`

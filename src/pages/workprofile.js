@@ -48,7 +48,7 @@ const WorkProfile = () => {
       fetchingReviews()
     })
     .catch(err=> alert(err.response.data.error.description))
-    
+
   }
 
   // Getting Craftsmen Reviews
@@ -89,7 +89,7 @@ const WorkProfile = () => {
           <div className="little-nav">
             <p>Worker Profile</p>
             <button>kontaktieren</button>
-          </div> 
+          </div>
           <img src={userphoto} alt="" />
           <p className="name">{craftsmen.full_name}</p>
           <p className="work-domain">{craftsmen.craft}</p>
@@ -122,36 +122,40 @@ const WorkProfile = () => {
 
               <div className="px-4 py-6 sm:px-6">
                 <ul className="space-y-8">
-                  {reviews && reviews.map((review) => (
-                      <li key={review.id}>
-                        <div className="flex space-x-3">
-                          <div className="flex-shrink-0">
-                            <img
-                                className="h-10 w-10 rounded-full"
-                                src={userphoto}
-                                alt=""
-                            />
-                          </div>
-                          <div>
-                            <div className="text-sm">
-                              <a href="#" className="font-medium text-gray-900">
-                                {review.customer.full_name}
-                              </a>
-                            </div>
-                            <div className="mt-1 text-sm text-gray-700">
-                              <p>{review.body}</p>
-                            </div>
-                            <div className="mt-2 text-sm space-x-2">
-                              <span className="text-gray-500 font-medium">{review.created_at_human}</span>{' '}
-                              <span className="text-gray-500 font-medium">&middot;</span>{' '}
-                              <span className="text-gray-500 font-medium">Rating: &nbsp;
-                                <span className="font-bold">{review.rating}</span>
+                  {
+                    reviews.length
+                        ? reviews.map((review) => (
+                            <li key={review.id}>
+                              <div className="flex space-x-3">
+                                <div className="flex-shrink-0">
+                                  <img
+                                      className="h-10 w-10 rounded-full"
+                                      src={userphoto}
+                                      alt=""
+                                  />
+                                </div>
+                                <div>
+                                  <div className="text-sm">
+                                    <a href="#" className="font-medium text-gray-900">
+                                      {review.customer.full_name}
+                                    </a>
+                                  </div>
+                                  <div className="mt-1 text-sm text-gray-700">
+                                    <p>{review.body}</p>
+                                  </div>
+                                  <div className="mt-2 text-sm space-x-2">
+                                    <span className="text-gray-500 font-medium">{review.created_at_human}</span>{' '}
+                                    <span className="text-gray-500 font-medium">&middot;</span>{' '}
+                                    <span className="text-gray-500 font-medium">Rating: &nbsp;
+                                      <span className="font-bold">{review.rating}</span>
                               </span>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                  ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                        ))
+                        : (<li>No reviews yet.</li>)
+                  }
                 </ul>
               </div>
             </div>
@@ -196,7 +200,7 @@ const WorkProfile = () => {
 
                     <div className="mt-3 flex items-center justify-between">
                       <input
-                      value='Submite'
+                      value='Submit'
                           type="submit"
                           className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                       />

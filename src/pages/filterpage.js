@@ -11,13 +11,20 @@ import { useHistory } from "react-router-dom";
 const Filter = ({ searchValue, setSearchValue }) => {
   // Variables
   const [craftsmen, setCraftsmen] = useState([]);
+  const [placeFilter, setPlaceFilter] = useState(true)
+  const [ratingFilter, setRatingFilter] = useState(true)
+  const [priceFilter, setPriceFilter] = useState(true)
+  const [languageFilter, setLanguageFilter] = useState(true)
   const history = useHistory();
 
   // Filtered Craftsmen
   const filterCraftsmen = (filterName, order) => {
     filterName = filterName || 'full_name'
-    order = order || 'asc'
-    axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen?query=${searchValue}&sort=${filterName}&order=${order}`)
+    let filterOrder = 'asc';
+    if (order === false) {
+      filterOrder = 'desc'
+    }
+    axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen?query=${searchValue}&sort=${filterName}&order=${filterOrder}`)
     .then(res => setCraftsmen(res.data.data))
     .catch(err=> alert(err.response.data.error.description))
   }
@@ -58,16 +65,16 @@ const Filter = ({ searchValue, setSearchValue }) => {
         </ul>
         <div className="filter-header">
           <div className="filters">
-            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('address')}>
+            <button className="hover:shadow-md" onClick={()=> {filterCraftsmen('address', placeFilter); setPlaceFilter(!placeFilter)}}>
               Ort
             </button>
-            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('rating')}>
+            <button className="hover:shadow-md" onClick={()=> {filterCraftsmen('rating', ratingFilter); setRatingFilter(!ratingFilter)}}>
               Bewertung
             </button>
-            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('price')}>
+            <button className="hover:shadow-md" onClick={()=> {filterCraftsmen('price', priceFilter); setPriceFilter(!priceFilter)}}>
               Preis
             </button>
-            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('language')}>
+            <button className="hover:shadow-md" onClick={()=> {filterCraftsmen('language', languageFilter); setLanguageFilter(!languageFilter)}}>
               Sprache
             </button>
 

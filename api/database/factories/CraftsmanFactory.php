@@ -21,13 +21,13 @@ class CraftsmanFactory extends Factory
         return [
             'username' => $faker->userName,
             'full_name' => $faker->name,
-            'password' => $faker->password,
+            'password' => password_hash('password', PASSWORD_DEFAULT),
             'craft' => $faker->word,
             'language' => $faker->languageCode,
             'address' => $faker->address,
-            'description' => $faker->sentence,
-            'price' => $faker->randomFloat(),
-            'rating' => $faker->randomDigit
+            'description' => $faker->paragraph,
+            'price' => $faker->randomFloat(2, 1, 500),
+            'rating' => $faker->randomFloat(2, 1, 5)
         ];
     }
 }

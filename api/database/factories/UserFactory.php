@@ -21,7 +21,7 @@ class UserFactory extends Factory
         return [
             'username' => $faker->userName,
             'full_name' => $faker->name,
-            'password' => $faker->password,
+            'password' => password_hash('password', PASSWORD_DEFAULT),
         ];
     }
 }

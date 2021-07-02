@@ -16,7 +16,13 @@ class MySqlReviewRepository implements ReviewRepository
      */
     public function findAll(Craftsman $craftsman): array
     {
-         return Review::where('to_id', $craftsman->id)->get()->toArray();
+         return Review::where('to_id', $craftsman->id)
+             ->get()
+             ->map(function($review) {
+                 $review->created_at_human = $review->created_at->diffForHumans();
+                 return $review;
+             })
+             ->toArray();
     }
 
     /**

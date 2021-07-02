@@ -6,6 +6,7 @@ import pencil from "../assets/pencil.png";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import Modal from 'react-modal';
+import { useHistory } from "react-router-dom";
 
 const UserProfile = () => {
   // Variables
@@ -14,7 +15,10 @@ const UserProfile = () => {
   const [jwtToken, setJwtToken] = useState('');
   const [userID, setUserID] = useState(0);
   const [modalDisplayName, setModalDisplayName] = useState(false);
+  const [modalUsername, setModalUsername] = useState(false);
+  const history = useHistory();
   const [patchInputValue, setPatchInputValue] = useState('');
+  
   // Fething user Data
   const fetchUserData = () => {
     let tempUser = sessionStorage.getItem('user');
@@ -25,17 +29,62 @@ const UserProfile = () => {
     setUserName(tempUser.user.username);
   }
 
+  // User Logout 
+  const userLogout = () => {
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('userType')
+    history.push('/')
+  } 
+
   // User Display Name Patch Function
   const patchDisplayName = () => {
     if (patchInputValue) {
-      
-      axios.patch(`http://trusty.local/users/${userID}`,{
+      axios.patch(`${process.env.REACT_APP_BASE_URL}/users`,{
         full_name: patchInputValue
-      }).then(res=> {console.log(res);setModalDisplayName(false)})
+      },{
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+        }
+      }).then(res=>{
+        let tempUser = sessionStorage.getItem('user');
+        tempUser = JSON.parse(tempUser);
+        tempUser.user.full_name = res.data.data.full_name
+        setFullName(tempUser.user.full_name)
+        sessionStorage.setItem('user', JSON.stringify(tempUser))
+        setModalDisplayName(false)
+        setPatchInputValue('')
+      })
+      .catch(err=> alert(err.response.data.error.description))
       return
     }
     alert('Display Name Can Not be Empty!')
   } 
+
+  // User Username Patch Function
+  const patchUsername = () => {
+    if (patchInputValue) {
+      axios.patch(`${process.env.REACT_APP_BASE_URL}/users`,{
+        username: patchInputValue
+      },{
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+          
+        }
+      }).then(res=>{
+        let tempUser = sessionStorage.getItem('user');
+        tempUser = JSON.parse(tempUser);
+        tempUser.user.username = res.data.data.username
+        setUserName(tempUser.user.username)
+        sessionStorage.setItem('user', JSON.stringify(tempUser))
+        setModalUsername(false)
+        setPatchInputValue('')
+      })
+      .catch(err=> alert(err.response.data.error.description))
+      return
+    }
+    alert('Display Name Can Not be Empty!')
+  }
+
   useEffect(()=>{
     fetchUserData()
   },[])
@@ -78,19 +127,12 @@ const UserProfile = () => {
               <p className="email-one">User Name</p>
               <div className="email-part">
                 <p>{userName}</p>
-                <button>Edit</button>
-              </div>
-            </div>
-            <div className="email">
-              <p className="email-one">Password</p>
-              <div className="email-part">
-                <p>. . . . . .</p>
-                <button>Edit</button>
+                <button onClick={()=> setModalUsername(true)}>Edit</button>
               </div>
             </div>
           </div>
           <div className="sign-out">
-            <button className="signout">Abmelden</button>
+            <button onClick={()=> userLogout()} className="signout">Abmelden</button>
           </div>
         </div>
         <div className="tower2">
@@ -103,6 +145,14 @@ const UserProfile = () => {
         <button className='modal-close' onClick={()=> setModalDisplayName(false)}>Close</button>
         <button className='modal-save' onClick={()=> patchDisplayName()}>Save Changes</button>
       </Modal>
+
+      <Modal isOpen={modalUsername} onRequestClose={()=> setModalUsername(false)} >
+        <h1 className='modal-h1'>Edit Username</h1>
+        <input value={patchInputValue} onChange={e => setPatchInputValue(e.target.value)} placeholder='Your New Username' className='modal-input' type="text" /><br />
+        <button className='modal-close' onClick={()=> setModalUsername(false)}>Close</button>
+        <button className='modal-save' onClick={()=> patchUsername()}>Save Changes</button>
+      </Modal>
+
     </div>
   );
 };

@@ -61,8 +61,8 @@
       }
       .details-worker {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
         flex-direction: column;
         background: white;
         margin-bottom: 40px;

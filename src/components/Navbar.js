@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/trustylogo.png";
 import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [userType, setUserType] = useState('');
+  const [loginDisplay, setLoginDisplay] = useState('initial')
+
+  useEffect(()=>{
+    const tempUser = sessionStorage.getItem('userType');
+    setUserType(tempUser)
+    if (userType) {
+      setLoginDisplay('none')
+    }
+  },[userType])
   return (
     <div className="navbar">
       <nav>
@@ -34,27 +44,29 @@ const Navbar = () => {
             <li>Suchen</li>
           </NavLink>
 
+          { userType === 'customer'? 
           <NavLink
             to="/user"
             activeStyle={{
               fontWeight: "bold",
               color: "#298da6",
             }}
-            style={{ textDecoration: "none", color: "#000000" }}
-          >
+            style={{ textDecoration: "none", color: "#000000" }}>
             <li>Kunden Profil</li>
-          </NavLink>
+          </NavLink> : null
+          }
 
+          { userType === 'craftsman'?
           <NavLink
-            to="/work"
+            to="/craftsman/profile"
             activeStyle={{
               fontWeight: "bold",
               color: "#298da6",
             }}
-            style={{ textDecoration: "none", color: "#000000" }}
-          >
+            style={{ textDecoration: "none", color: "#000000" }}>
             <li>Handwerker Profil</li>
-          </NavLink>
+          </NavLink> : null
+          }
 
           <NavLink
             to="/about"
@@ -69,7 +81,7 @@ const Navbar = () => {
 
         </ul>
 
-        <div className="nav-button">
+        <div style={{display: `${loginDisplay}`}} className="nav-button">
           <Link to="/signup">
             <button>Registrieren</button>
           </Link>

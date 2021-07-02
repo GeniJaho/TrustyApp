@@ -18,6 +18,10 @@ class Review extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s'
+    ];
+
     protected $with = ['customer', 'craftsman'];
 
     public function craftsman(): BelongsTo

@@ -14,9 +14,9 @@ class CreateCraftsmenTable extends AbstractMigration
             ->addColumn('craft', 'string')
             ->addColumn('address', 'string')
             ->addColumn('language', 'string')
-            ->addColumn('description', 'string')
-            ->addColumn('price', 'double')
-            ->addColumn('rating', 'double')
+            ->addColumn('description', 'string', ['length' => 1000])
+            ->addColumn('price', 'double', ['decimals' => 2])
+            ->addColumn('rating', 'double', ['decimals' => 2])
             ->addIndex('username', Index::TYPE_UNIQUE)
             ->create();
     }

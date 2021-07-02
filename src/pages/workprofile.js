@@ -136,9 +136,9 @@ const WorkProfile = () => {
                                 </div>
                                 <div>
                                   <div className="text-sm">
-                                    <a href="#" className="font-medium text-gray-900">
+                                    <div className="font-bold text-gray-900">
                                       {review.customer.full_name}
-                                    </a>
+                                    </div>
                                   </div>
                                   <div className="mt-1 text-sm text-gray-700">
                                     <p>{review.body}</p>

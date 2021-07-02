@@ -99,7 +99,7 @@ const Filter = ({ searchValue, setSearchValue }) => {
               <p className="gender">{craftsman.craft}</p>
               <div className="reviews">
                 {stars(craftsman.rating)}
-                <p className="filter-type">Bewertungen {craftsman.rating}</p>
+                <p className="filter-type">Bewertungen {craftsman.rating.toFixed(2)}</p>
               </div>
               <p>
                 {craftsman.description}

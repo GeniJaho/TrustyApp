@@ -27,6 +27,7 @@ class MySqlCraftsmanRepository implements CraftsmanRepository
             ->orWhere('craft', 'like', "%$query%")
             ->orWhere('language', 'like', "%$query%")
             ->orWhere('address', 'like', "%$query%")
+            ->orWhere('description', 'like', "%$query%")
             ->orderBy($sort, $ascending ? 'asc' : 'desc')
             ->get()
             ->values()

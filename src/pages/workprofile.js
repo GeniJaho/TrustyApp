@@ -11,32 +11,62 @@ const WorkProfile = () => {
   const { id } = useParams();
   const [craftsmen, setCraftsmen] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [postRating, setPostRating] = useState(1);
+  const [reviewBody, setReviewBody] = useState('');
+  const [reviewBox, setReviewBox] = useState('none');
+  const [jwtToken, setJwtToken] = useState('');
   // Getting Craftsmen Details
   const fetchCraftsmenDetails = () => {
+    const tempUserType = sessionStorage.getItem('userType');
+    if (tempUserType === 'customer') {
+      let tempUser = sessionStorage.getItem('user');
+      tempUser = JSON.parse(tempUser);
+      setJwtToken(tempUser.token);
+    }
     axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen/${id}`)
     .then(res => {
       setCraftsmen(res.data.data);
       fetchingReviews();
-
     }).catch(err=> alert(err.response.data.error.description))
   }
   // Post Comment
-  // const postComment = () => {
-  //   axios.post(`http://trusty.local/reviews/${id}`,{
-  //     body: 'Some Text',
-  //     rating: 1,
-  //     from_id: 1,
-  //     to_id: id,
-  //   }).then(()=> alert("Review Submitted Successfully!"))
-  // }
+  const postComment = (e) => {
+    e.preventDefault()
+    if (postRating < 1) {
+      setPostRating(1)
+    } else if(postRating > 5) {
+      setPostRating(5)
+    }
+    axios.post(`${process.env.REACT_APP_BASE_URL}/reviews/${id}`,{
+      body: reviewBody,
+      rating: Math.trunc(postRating),
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`
+      }
+    }).then(()=> {
+      fetchingReviews()
+    })
+    .catch(err=> alert(err.response.data.error.description))
+    
+  }
 
   // Getting Craftsmen Reviews
   const fetchingReviews = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/reviews/${id}`)
-    .then(res => {setReviews(res.data.data);console.log(reviews)})
+    .then(res => {setReviews(res.data.data);console.log(res.data.data)})
     .catch(err=> alert(err.response.data.error.description))
   }
+  // Show Review Post Box
+  const showReviewBox = () => {
+    const tempUserType = sessionStorage.getItem('userType');
+    if (tempUserType === 'customer') {
+      setReviewBox('flex');
+    }
+  }
+  // Page On Load
   useEffect(()=>{
+    showReviewBox()
     fetchCraftsmenDetails()
   },[id]);
 
@@ -59,7 +89,7 @@ const WorkProfile = () => {
           <div className="little-nav">
             <p>Worker Profile</p>
             <button>kontaktieren</button>
-          </div>
+          </div> 
           <img src={userphoto} alt="" />
           <p className="name">{craftsmen.full_name}</p>
           <p className="work-domain">{craftsmen.craft}</p>
@@ -126,23 +156,24 @@ const WorkProfile = () => {
               </div>
             </div>
             <div className="bg-gray-50 px-4 py-6 sm:px-6">
-              <div className="flex space-x-3">
-                <div className="flex-shrink-0 h-10 w-10">
+              <div style={{display: `${reviewBox}`}} className="flex space-x-3">
+                <div  className="flex-shrink-0 h-10 w-10">
                   <img className="h-10 w-10 rounded-full" src={userphoto} alt=""/>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <form action="#">
+                <div  className="min-w-0 flex-1">
+                  <form onSubmit={(e)=> postComment(e)}>
                     <div>
                       <label htmlFor="review" className="sr-only">
                         Review
                       </label>
                       <textarea
+                          value={reviewBody}
+                          onChange={e=> setReviewBody(e.target.value)}
                           id="review"
                           name="review"
                           rows={3}
                           className="shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Add a review"
-                          defaultValue={''}
                       />
                     </div>
 
@@ -151,6 +182,8 @@ const WorkProfile = () => {
                         Rating
                       </label>
                       <input
+                          value={postRating}
+                          onChange={e=> setPostRating(e.target.value)}
                           type="number"
                           min="1"
                           max="5"
@@ -162,12 +195,11 @@ const WorkProfile = () => {
                     </div>
 
                     <div className="mt-3 flex items-center justify-between">
-                      <button
+                      <input
+                      value='Submite'
                           type="submit"
                           className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        Submit
-                      </button>
+                      />
                     </div>
                   </form>
                 </div>

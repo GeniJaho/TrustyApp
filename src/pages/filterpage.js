@@ -25,9 +25,8 @@ const Filter = ({ searchValue, setSearchValue }) => {
   // Showing start
   const stars = ratingScore => {
 
-    let floor = Math.min(5, Math.floor(ratingScore))
+    let floor = Math.min(5, Math.round(ratingScore))
     if (floor === 0) floor = 1
-    if (ratingScore >= 4.75) floor = 5
 
     return(
         <>

@@ -45,7 +45,10 @@ const WorkProfile = () => {
         Authorization: `Bearer ${jwtToken}`
       }
     }).then(()=> {
+      fetchCraftsmenDetails()
       fetchingReviews()
+      setReviewBody('')
+      setPostRating(5)
     })
     .catch(err=> alert(err.response.data.error.description))
 
@@ -98,11 +101,18 @@ const WorkProfile = () => {
             <p className="first">
               <strong>Adresse:</strong> {craftsmen.address}
             </p>
-            <p className="header-second">Beschreibung </p>
-            <p className="thrid">
-              {craftsmen.description}
+            <p className="first">
+              <strong>Language:</strong> {craftsmen.language}
             </p>
-            <p></p>
+            <p className="first">
+              <strong>Price:</strong> {craftsmen.price}
+            </p>
+            <p className="first">
+              <strong>Rating:</strong> {craftsmen.rating}
+            </p>
+            <p className="first">
+              <strong>Beschreibung:</strong> {craftsmen.description}
+            </p>
           </div>
         </div>
       </div>
@@ -159,56 +169,60 @@ const WorkProfile = () => {
                 </ul>
               </div>
             </div>
+
             <div className="bg-gray-50 px-4 py-6 sm:px-6">
-              <div style={{display: `${reviewBox}`}} className="flex space-x-3">
-                <div  className="flex-shrink-0 h-10 w-10">
-                  <img className="h-10 w-10 rounded-full" src={userphoto} alt=""/>
-                </div>
-                <div  className="min-w-0 flex-1">
-                  <form onSubmit={(e)=> postComment(e)}>
-                    <div>
-                      <label htmlFor="review" className="sr-only">
-                        Review
-                      </label>
-                      <textarea
-                          value={reviewBody}
-                          onChange={e=> setReviewBody(e.target.value)}
-                          id="review"
-                          name="review"
-                          rows={3}
-                          className="shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
-                          placeholder="Add a review"
-                      />
-                    </div>
+              {reviewBox === 'flex' ? (
+                    <div style={{display: `${reviewBox}`}} className="flex space-x-3">
+                      <div  className="flex-shrink-0 h-10 w-10">
+                        <img className="h-10 w-10 rounded-full" src={userphoto} alt=""/>
+                      </div>
+                      <div  className="min-w-0 flex-1">
+                        <form onSubmit={(e)=> postComment(e)}>
+                          <div>
+                            <label htmlFor="review" className="sr-only">
+                              Review
+                            </label>
+                            <textarea
+                                value={reviewBody}
+                                onChange={e=> setReviewBody(e.target.value)}
+                                id="review"
+                                name="review"
+                                rows={3}
+                                className="shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
+                                placeholder="Add a review"
+                            />
+                          </div>
 
-                    <div className="mt-3 w-48">
-                      <label htmlFor="rating" className="sr-only">
-                        Rating
-                      </label>
-                      <input
-                          value={postRating}
-                          onChange={e=> setPostRating(e.target.value)}
-                          type="number"
-                          min="1"
-                          max="5"
-                          name="rating"
-                          id="rating"
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                          placeholder="Rate from 1-5"
-                      />
-                    </div>
+                          <div className="mt-3 w-48">
+                            <label htmlFor="rating" className="sr-only">
+                              Rating
+                            </label>
+                            <input
+                                value={postRating}
+                                onChange={e=> setPostRating(e.target.value)}
+                                type="number"
+                                min="1"
+                                max="5"
+                                name="rating"
+                                id="rating"
+                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                placeholder="Rate from 1-5"
+                            />
+                          </div>
 
-                    <div className="mt-3 flex items-center justify-between">
-                      <input
-                      value='Submit'
-                          type="submit"
-                          className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      />
+                          <div className="mt-3 flex items-center justify-between">
+                            <input
+                                value='Submit'
+                                type="submit"
+                                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            />
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </form>
-                </div>
-              </div>
+              ): (<p>Please log in to post a review.</p>)}
             </div>
+
           </div>
         </section>
       </div>

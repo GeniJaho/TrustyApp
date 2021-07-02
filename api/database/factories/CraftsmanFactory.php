@@ -26,7 +26,7 @@ class CraftsmanFactory extends Factory
             'language' => $faker->languageCode,
             'address' => $faker->address,
             'description' => $faker->paragraph,
-            'price' => $faker->randomFloat(),
+            'price' => $faker->randomFloat(2, 1, 500),
             'rating' => $faker->randomFloat(2, 1, 5)
         ];
     }

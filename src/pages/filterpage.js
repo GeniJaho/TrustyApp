@@ -91,29 +91,17 @@ const Filter = ({ searchValue, setSearchValue }) => {
         </ul>
         <div className="filter-header">
           <div className="filters">
-            <button onClick={()=> filterCraftsmen('address')}>
+            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('address')}>
               Ort
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
-            <button onClick={()=> filterCraftsmen('rating')}>
+            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('rating')}>
               Bewertung
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
-            <button onClick={()=> filterCraftsmen('price')}>
+            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('price')}>
               Preis
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
-            <button onClick={()=> filterCraftsmen('language')}>
+            <button className="hover:shadow-md" onClick={()=> filterCraftsmen('language')}>
               Sprache
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
 
             <div className="max-w-lg w-36 lg:max-w-xs">
@@ -136,8 +124,9 @@ const Filter = ({ searchValue, setSearchValue }) => {
           </div>
           {craftsmen.map(craftsman=>{
             return(
-          <div className="filter-values" key={craftsman.id}>
-            <div onClick={()=> craftsmenDetails(craftsman.id)} className="value">
+          <div onClick={()=> craftsmenDetails(craftsman.id)}
+               className="filter-values hover:shadow-lg" key={craftsman.id}>
+            <div className="value">
               <p className="name">{craftsman.full_name}</p>
               <p className="gender">{craftsman.craft}</p>
               <div className="reviews">

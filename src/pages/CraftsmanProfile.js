@@ -54,7 +54,7 @@ const CraftsmanProfile = () => {
   }
 
 
-  // User Logout 
+  // User Logout
   const userLogout = () => {
     sessionStorage.removeItem('craftsman')
     sessionStorage.removeItem('userType')
@@ -86,7 +86,7 @@ const CraftsmanProfile = () => {
       tempUser.craftsman.address = res.data.data.address
       tempUser.craftsman.description = res.data.data.description
       sessionStorage.setItem('craftsman', JSON.stringify(tempUser))
-      
+
     }).then(()=> fetchUserData())
     .then(()=> setModalDisplay(false))
     .catch(err => alert(err.response.data.error.description))
@@ -127,51 +127,52 @@ const CraftsmanProfile = () => {
               <p className="email-one">Display Name</p>
               <div className="email-part">
                 <p>{fullName}</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Username</p>
               <div className="email-part">
                 <p>{userName}</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Craft</p>
               <div className="email-part">
                 <p>{craft}</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Price</p>
               <div className="email-part">
                 <p>{price}$</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Language</p>
               <div className="email-part">
                 <p>{language}</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Address</p>
               <div className="email-part">
                 <p>{address}</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
             <div className="email">
               <p className="email-one">Description</p>
               <div className="email-part">
                 <p>{description}</p>
-                <button onClick={() => setModalDisplay(true)}>Edit</button>
               </div>
             </div>
+
+            <div className="flex justify-end">
+              <button
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() => setModalDisplay(true)}
+              >Edit Details</button>
+            </div>
+
           </div>
           <div className="sign-out">
             <button onClick={() => userLogout()} className="signout">Abmelden</button>
@@ -182,7 +183,7 @@ const CraftsmanProfile = () => {
         </div>
       </div>
       <Modal isOpen={modalDisplay} onRequestClose={() => {fetchUserData(); setModalDisplay(false)}} >
-        <h1 className='modal-h1'>Edit Your Proile</h1>
+        <h1 className='modal-h1'>Edit Your Profile</h1>
         <div style={{ display: "flex", alignItems: 'center', justifyContent: 'center', marginTop: '20px' }}>
           <form onSubmit={handleSubmit(craftsmenPatch)}>
             <input defaultValue={fullName} className='patch_inputs' type="text" placeholder="Full Name" {...register('full_name')} />
@@ -211,7 +212,7 @@ const CraftsmanProfile = () => {
               outline: 'none',
               padding: '15px',
               resize: 'vertical'
-            }} placeholder='Craft Description' {...register('description')}></textarea><br />
+            }} rows="5" placeholder='Craft Description' {...register('description')}></textarea><br />
 
             <input className='patch_inputs' style={{ backgroundColor: 'skyBlue', fontSize: '18px' }} type="submit" value='Save Changes' />
           </form>

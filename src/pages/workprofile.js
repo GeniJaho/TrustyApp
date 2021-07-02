@@ -60,7 +60,10 @@ const WorkProfile = () => {
         Authorization: `Bearer ${jwtToken}`
       }
     })
-    .then(()=> fetchingReviews())
+    .then(()=> {
+      fetchingReviews()
+      fetchCraftsmenDetails()
+    })
     .catch(err=> alert(err.response.data.error.description))
   }
   // Show Delete Button
@@ -69,7 +72,16 @@ const WorkProfile = () => {
     const tempUser = JSON.parse(sessionStorage.getItem('user'));
     if (tempUserType === 'customer' && tempUser.user.id === userId) {
       return(
-        <button onClick={()=> deleteReview(reviewid)}>Delete</button>
+          <span>
+            <span className="text-gray-500 font-medium">&middot;</span>{' '}
+            <button
+                onClick={() => deleteReview(reviewid)}
+                type="button"
+                className="inline-flex self-end items-center ml-2 px-2 py-1 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+            >
+              Delete
+            </button>
+          </span>
       )
     }
 
@@ -111,7 +123,6 @@ const WorkProfile = () => {
         <div className="worker-details">
           <div className="little-nav">
             <p>Worker Profile</p>
-            <button>kontaktieren</button>
           </div>
           <img src={userphoto} alt="" />
           <p className="name">{craftsmen.full_name}</p>
@@ -164,7 +175,7 @@ const WorkProfile = () => {
                                       alt=""
                                   />
                                 </div>
-                                <div>
+                                <div className="w-full">
                                   <div className="text-sm">
                                     <div className="font-bold text-gray-900">
                                       {review.customer.full_name}
@@ -173,7 +184,7 @@ const WorkProfile = () => {
                                   <div className="mt-1 text-sm text-gray-700">
                                     <p>{review.body}</p>
                                   </div>
-                                  <div className="mt-2 text-sm space-x-2">
+                                  <div className="mt-2 text-sm space-x-2 w-full">
                                     <span className="text-gray-500 font-medium">{review.created_at_human}</span>{' '}
                                     <span className="text-gray-500 font-medium">&middot;</span>{' '}
                                     <span className="text-gray-500 font-medium">Rating: &nbsp;

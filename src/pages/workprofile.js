@@ -45,7 +45,10 @@ const WorkProfile = () => {
         Authorization: `Bearer ${jwtToken}`
       }
     }).then(()=> {
+      fetchCraftsmenDetails()
       fetchingReviews()
+      setReviewBody('')
+      setPostRating(5)
     })
     .catch(err=> alert(err.response.data.error.description))
 
@@ -98,11 +101,18 @@ const WorkProfile = () => {
             <p className="first">
               <strong>Adresse:</strong> {craftsmen.address}
             </p>
-            <p className="header-second">Beschreibung </p>
-            <p className="thrid">
-              {craftsmen.description}
+            <p className="first">
+              <strong>Language:</strong> {craftsmen.language}
             </p>
-            <p></p>
+            <p className="first">
+              <strong>Price:</strong> {craftsmen.price}
+            </p>
+            <p className="first">
+              <strong>Rating:</strong> {craftsmen.rating}
+            </p>
+            <p className="first">
+              <strong>Beschreibung:</strong> {craftsmen.description}
+            </p>
           </div>
         </div>
       </div>

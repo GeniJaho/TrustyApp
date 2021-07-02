@@ -53,11 +53,31 @@ const WorkProfile = () => {
     .catch(err=> alert(err.response.data.error.description))
 
   }
+  // Delete Review Function
+  const deleteReview = reviewID => {
+    axios.delete(`${process.env.REACT_APP_BASE_URL}/reviews/${id}/${reviewID}`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`
+      }
+    })
+    .then(()=> fetchingReviews())
+    .catch(err=> alert(err.response.data.error.description))
+  }
+  // Show Delete Button
+  const deleteButton = (userId, reviewid) =>{
+    const tempUserType = sessionStorage.getItem('userType');
+    const tempUser = JSON.parse(sessionStorage.getItem('user'));
+    if (tempUserType === 'customer' && tempUser.user.id === userId) {
+      return(
+        <button onClick={()=> deleteReview(reviewid)}>Delete</button>
+      )
+    }
 
+  }
   // Getting Craftsmen Reviews
   const fetchingReviews = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/reviews/${id}`)
-    .then(res => {setReviews(res.data.data);console.log(res.data.data)})
+    .then(res => {setReviews(res.data.data)})
     .catch(err=> alert(err.response.data.error.description))
   }
   // Show Review Post Box
@@ -133,7 +153,7 @@ const WorkProfile = () => {
               <div className="px-4 py-6 sm:px-6">
                 <ul className="space-y-8">
                   {
-                    reviews.length
+                    reviews
                         ? reviews.map((review) => (
                             <li key={review.id}>
                               <div className="flex space-x-3">
@@ -158,7 +178,8 @@ const WorkProfile = () => {
                                     <span className="text-gray-500 font-medium">&middot;</span>{' '}
                                     <span className="text-gray-500 font-medium">Rating: &nbsp;
                                       <span className="font-bold">{review.rating}</span>
-                              </span>
+                                    </span>
+                                    {deleteButton(review.from_id, review.id)}
                                   </div>
                                 </div>
                               </div>

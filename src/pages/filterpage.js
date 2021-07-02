@@ -20,60 +20,28 @@ const Filter = ({ searchValue, setSearchValue }) => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/craftsmen?query=${searchValue}&sort=${filterName}&order=${order}`)
     .then(res => setCraftsmen(res.data.data))
     .catch(err=> alert(err.response.data.error.description))
-
-    
   }
 
   // Showing start
   const stars = ratingScore => {
-    if (ratingScore <= 1) {
-      return(
-        <img src={Star} alt="" />
-      )
-    }else if( ratingScore === 2){
-      return(
+
+    let floor = Math.min(5, Math.floor(ratingScore))
+    if (floor === 0) floor = 1
+    if (ratingScore >= 4.75) floor = 5
+
+    return(
         <>
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
+          {[...Array(floor)].map((obj, i) =>
+            <img src={Star} alt="" key={i} />
+          )}
         </>
-      )
-    }else if( ratingScore === 3){
-      return(
-        <>
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-        </>
-      )
-    }else if( ratingScore === 4){
-      return(
-        <>
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-        </>
-      )
-    }else if( ratingScore === 5){
-      return(
-        <>
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-          <img src={Star} alt="" />
-        </>
-      )
-    }
+    )
   }
   // Push to Craftsmen Details
   const craftsmenDetails = id => {
       history.push(`/work/${id}`)
   }
   // Page load
-  useEffect(() => {
-    filterCraftsmen()
-  }, [])
   useEffect(()=>{
     filterCraftsmen()
   },[searchValue])

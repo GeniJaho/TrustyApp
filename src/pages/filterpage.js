@@ -50,27 +50,15 @@ const Filter = ({ searchValue, setSearchValue }) => {
           <div className="filters">
             <button onClick={()=> filterCraftsmen('address')}>
               Ort
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
             <button onClick={()=> filterCraftsmen('rating')}>
               Bewertung
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
             <button onClick={()=> filterCraftsmen('price')}>
               Preis
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
             <button onClick={()=> filterCraftsmen('language')}>
               Sprache
-              <span>
-                <img src={Down} alt="" />
-              </span>
             </button>
 
             <div className="max-w-lg w-36 lg:max-w-xs">

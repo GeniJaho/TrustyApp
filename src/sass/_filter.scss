@@ -41,7 +41,7 @@
         justify-content: space-between;
         background: #cce7ea;
         border-radius: 20px;
-        padding: 10px 40px;
+        padding: 20px 30px;
         align-items: center;
         margin-bottom: 40px;
         .value {
@@ -79,9 +79,10 @@
         }
         .user-img {
           align-self: flex-start;
+          flex-shrink: 0;
           img {
-            width: 100px;
-            height: 100px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
           }
         }

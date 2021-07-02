@@ -9,8 +9,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import CraftsmanSignup from "./pages/CraftsmanSignup";
 import CraftsmanProfile from "./pages/CraftsmanProfile";
+import { useState } from "react";
 
 function App() {
+  const [searchValue, setSearchValue] = useState('');
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,10 +20,10 @@ function App() {
           <Route path="/" component={Signin} exact />
           <Route path="/signup" component={Signup} />
           <Route path="/craftsman/signup" component={CraftsmanSignup} />
-          <Route path="/home" component={Home}></Route>
+          <Route path="/home"><Home searchValue={searchValue} setSearchValue={setSearchValue} /></Route>
           <Route path="/about" component={About}></Route>
           <Route path="/work/:id" component={WorkProfile}></Route>
-          <Route path="/filter" component={Filter}/>
+          <Route path="/filter"><Filter searchValue={searchValue} setSearchValue={setSearchValue} /></Route>
           <Route path="/user" component={UserProfile}/>
           <Route path="/craftsman/profile" component={CraftsmanProfile}/>
         </Switch>

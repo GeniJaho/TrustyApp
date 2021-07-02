@@ -3,8 +3,10 @@ import Search from "../assets/search.png";
 import Civil from "../assets/civil.png";
 import Cutter from "../assets/cutter.png";
 import Navbar from "../components/Navbar";
+import { useHistory } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ searchValue, setSearchValue }) => {
+  const history = useHistory();
   return (
     <div className="home">
       <Navbar></Navbar>
@@ -26,9 +28,9 @@ const Home = () => {
           <div className="search-container">
             <div className="search-tile">
               <img src={Search} alt="" />
-              <input type="text" />
+              <input value={searchValue} onChange={e=> setSearchValue(e.target.value)} type="text" />
             </div>
-            <button>Suchen</button>
+            <button onClick={()=> history.push('/filter')}>Suchen</button>
           </div>
         </div>
       </div>

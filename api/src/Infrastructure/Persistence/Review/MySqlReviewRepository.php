@@ -58,6 +58,6 @@ class MySqlReviewRepository implements ReviewRepository
             throw new ReviewNotFoundException();
         }
 
-        return $review->destroy();
+        return $review->delete();
     }
 }

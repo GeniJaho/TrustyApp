@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import CraftsmanSignup from "./pages/CraftsmanSignup";
 import CraftsmanProfile from "./pages/CraftsmanProfile";
 import { useState } from "react";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
@@ -26,6 +27,7 @@ function App() {
           <Route path="/filter"><Filter searchValue={searchValue} setSearchValue={setSearchValue} /></Route>
           <Route path="/user" component={UserProfile}/>
           <Route path="/craftsman/profile" component={CraftsmanProfile}/>
+          <Route path="*" component={PageNotFound}/>
         </Switch>
         <Footer/>
       </BrowserRouter>

@@ -18,7 +18,7 @@ const About = () => {
         </ul>
 
         <div className="about-photos">
-          <p className="title">About us</p>
+          <p className="title">Über uns</p>
           <div className="photos">
             <div className="photoname">
               <img src={User} alt="" />

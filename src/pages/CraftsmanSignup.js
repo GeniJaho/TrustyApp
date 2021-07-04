@@ -8,14 +8,15 @@ import axios from "axios";
 import { useEffect } from "react";
 
 const schemaCraftsman = yup.object().shape({
-  full_name: yup.string().required('Full Name is required!'),
-  username: yup.string().required('Username is required!'),
-  password: yup.string().min(8, 'Password must be at least 8 characters!').max(20, 'Password must be at most 20 characters!').required('Password is required!'),
+  full_name: yup.string().required('vollständiger Name ist erforderlich!'),
+  username: yup.string().required('Username ist erforderlich!'),
+  password: yup.string().min(8, 'Passwort muss mindestens 8 Zeichen lang sein!').max(20, 'Passwort darf maximal 20 Zeichen lang sein!').required('Passwort ist erforderlich!'),
+  // ?? 
   conf_password: yup.string().oneOf([yup.ref('password'), null]),
-  craft: yup.string().required('Craft Name is required!'),
-  price: yup.number().typeError('Price must be a number!').required('Price is required!').positive('Price must me abe greater than 0!'),
-  language: yup.string().required('Language is required!'),
-  address: yup.string().required('Address is required!'),
+  craft: yup.string().required('Tätigkeitsbereich ist erforderlich'),
+  price: yup.number().typeError('Preis muss ein Zahl sein!').required('Preis ist erforderlich!').positive('Preis muss größer als 0 sein!'),
+  language: yup.string().required('Sprache ist erforderlich!'),
+  address: yup.string().required('Adresse ist erforderlich!'),
   description: yup.string()
 })
 
@@ -48,31 +49,31 @@ const CraftsmanSignup = () => {
     return(
       <div className="top-signup">
       <img src={Logo} alt="" />
-      <p className="signup-title">Craftsmen Sign up</p>
+      <p className="signup-title">Handwerker Registrierung</p>
       <form onSubmit={handleSubmit(craftsmenRegister)}>
-        <input type="text"  placeholder="Full Name" {...register('full_name')}/>
+        <input type="text"  placeholder="vollständiger Name" {...register('full_name')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.full_name?.message}</p>
 
         <input type="text"  placeholder="Username" {...register('username')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.username?.message}</p>
 
-        <input type="text"  placeholder="Craft" {...register('craft')}/>
+        <input type="text"  placeholder="Tätigkeitsbereich" {...register('craft')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.craft?.message}</p>
 
-        <input type="text"  placeholder="Price" {...register('price')}/>
+        <input type="text"  placeholder="Preis" {...register('price')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.price?.message}</p>
 
-        <input type="text"  placeholder="Language" {...register('language')}/>
+        <input type="text"  placeholder="Sprachen" {...register('language')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.language?.message}</p>
 
-        <input type="text"   placeholder="Address" {...register('address')}/>
+        <input type="text"   placeholder="Adresse" {...register('address')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.address?.message}</p>
 
-        <input type="password"  placeholder="Password" {...register('password')}/>
+        <input type="password"  placeholder="Passwort" {...register('password')}/>
         <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.password?.message}</p>
 
-        <input type="password"  placeholder="Confirm Password" {...register('conf_password')}/>
-        <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.conf_password && "Password not matching!"}</p>
+        <input type="password"  placeholder="Passwort bestätigen" {...register('conf_password')}/>
+        <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.conf_password && "Passwort stimmt nicht überein!"}</p>
 
         <textarea style={{width: '344px',
          borderRadius: '20px',
@@ -80,9 +81,9 @@ const CraftsmanSignup = () => {
          border: '1px solid #000000',
          outline: 'none',
          padding: '15px',
-         resize: 'vertical'}} placeholder='Craft Description. Please include your phone number.' {...register('description')}></textarea><br />
+         resize: 'vertical'}} placeholder='Beschreibung. Bitte Handy Nummer oder Email eingeben.' {...register('description')}></textarea><br />
 
-        <input  style={{backgroundColor: 'skyBlue', fontSize: '18px'}} type="submit" value='Register' />
+        <input  style={{backgroundColor: 'skyBlue', fontSize: '18px'}} type="submit" value='Registrieren' />
       </form>
     </div>
     )
@@ -100,12 +101,12 @@ const CraftsmanSignup = () => {
       {craftsmenSignup()}
       <div className="bottom-signup">
         <p className="sigin-route">
-          Already have an account ?{" "}
+          Sie haben bereits ein Konto?{" "}
           <Link to="/" style={{ textDecoration: "none", color: "#000000" }}>
             <span>Login</span>
           </Link>
         </p>
-        <button onClick={()=> history.push('/signup')}>Sign Up as a Customer</button>
+        <button onClick={()=> history.push('/signup')}>Kunden Registrierung</button>
       </div>
     </div>
   );

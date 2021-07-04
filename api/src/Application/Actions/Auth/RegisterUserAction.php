@@ -19,18 +19,18 @@ class RegisterUserAction extends AuthAction
     protected function action(): Response
     {
         if (!$this->isGuest()) {
-            throw new Exception("You're already signed in.");
+            throw new Exception("Sie sind bereits angemeldet.");
         }
 
         $data = $this->getFormData();
 
         if (empty($data['username']) || empty($data['full_name']) ||
             empty($data['password']) || empty($data['conf_password'])) {
-            throw new Exception("Required fields are missing.");
+            throw new Exception("Erforderliche Felder fehlen.");
         }
 
         if ($data['password'] !== $data['conf_password']) {
-            throw new Exception("Passwords do not match.");
+            throw new Exception("Passwort stimmt nicht überein");
         }
 
         $user = $this->userRepository->findUserOfUsername($data['username']);

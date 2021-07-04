@@ -64,6 +64,10 @@
             align-items: center;
             margin-bottom: 10px;
 
+            img {
+              align-self: center;
+            }
+
             .filter-type {
               font-weight: normal;
               font-size: 14px;

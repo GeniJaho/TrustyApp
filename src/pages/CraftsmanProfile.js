@@ -1,24 +1,24 @@
 /* eslint-disable*/
 import React, { useEffect, useState } from "react";
 import tower1 from "../assets/Rectangle55.png";
-import userphoto from "../assets/Rectangle15.png";
-import pencil from "../assets/pencil.png";
+import userphoto from "../assets/craftAvatar.png";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import Modal from 'react-modal';
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+// what is yup
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-
+// Fehler
 const schemaPatchCraftsman = yup.object().shape({
-  full_name: yup.string().required('Full Name is required!'),
-  username: yup.string().required('Username is required!'),
-  craft: yup.string().required('Craft Name is required!'),
-  price: yup.number().typeError('Price must be a number!').required('Price is required!').positive('Price must me abe greater than 0!'),
-  language: yup.string().required('Language is required!'),
-  address: yup.string().required('Address is required!'),
+  full_name: yup.string().required('vollständiger Name ist erforderlich!'),
+  username: yup.string().required('Username ist erforderlich!'),
+  craft: yup.string().required('Tätigkeitsbereich ist erforderlich'),
+  price: yup.number().typeError('Preis muss ein Zahl sein!').required('Preis ist erforderlich!').positive('Preis muss größer als 0 sein!'),
+  language: yup.string().required('Sprache ist erforderlich!'),
+  address: yup.string().required('Adresse ist erforderlich!'),
   description: yup.string()
 })
 
@@ -38,6 +38,7 @@ const CraftsmanProfile = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaPatchCraftsman)
   });
+
   // Fething user Data
   const fetchUserData = () => {
     let tempUser = sessionStorage.getItem('craftsman');
@@ -54,7 +55,7 @@ const CraftsmanProfile = () => {
   }
 
 
-  // User Logout
+  // Handwerker Logout
   const userLogout = () => {
     sessionStorage.removeItem('craftsman')
     sessionStorage.removeItem('userType')
@@ -62,6 +63,7 @@ const CraftsmanProfile = () => {
   }
 
   // Craftsman Profile Patch Function
+  // Erklärung 
   const craftsmenPatch = data => {
     axios.patch(`${process.env.REACT_APP_BASE_URL}/craftsmen`, {
       full_name: data.full_name,
@@ -91,6 +93,7 @@ const CraftsmanProfile = () => {
     .then(()=> setModalDisplay(false))
     .catch(err => alert(err.response.data.error.description))
   }
+
   // Page On Load
   useEffect(() => {
     fetchUserData()
@@ -113,18 +116,15 @@ const CraftsmanProfile = () => {
         </div>
         <div className="user-details">
           <div className="user-title">
-            <button className="button-one">CRAFTSMAN PROFILE</button>
+            <button className="button-one">HANDWERKER PROFIL</button>
             <div className="circular-icon">
               <img src={userphoto} alt="" />
-            </div>
-            <div className="circular-pencil">
-              <img src={pencil} alt="" />
             </div>
             <p className="user-name">{fullName}</p>
           </div>
           <div className="user-detail">
             <div className="email">
-              <p className="email-one">Display Name</p>
+              <p className="email-one">Name</p>
               <div className="email-part">
                 <p>{fullName}</p>
               </div>
@@ -136,31 +136,31 @@ const CraftsmanProfile = () => {
               </div>
             </div>
             <div className="email">
-              <p className="email-one">Craft</p>
+              <p className="email-one">Tätigkeitsbereich</p>
               <div className="email-part">
                 <p>{craft}</p>
               </div>
             </div>
             <div className="email">
-              <p className="email-one">Price</p>
+              <p className="email-one">Stundenlohn</p>
               <div className="email-part">
-                <p>{price}$</p>
+                <p>{price}€</p>
               </div>
             </div>
             <div className="email">
-              <p className="email-one">Language</p>
+              <p className="email-one">Sprachen</p>
               <div className="email-part">
                 <p>{language}</p>
               </div>
             </div>
             <div className="email">
-              <p className="email-one">Address</p>
+              <p className="email-one">Adresse</p>
               <div className="email-part">
                 <p>{address}</p>
               </div>
             </div>
             <div className="email">
-              <p className="email-one">Description</p>
+              <p className="email-one">Beschreibung</p>
               <div className="email-part">
                 <p>{description}</p>
               </div>
@@ -170,7 +170,7 @@ const CraftsmanProfile = () => {
               <button
                   className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={() => setModalDisplay(true)}
-              >Edit Details</button>
+              >Ändern</button>
             </div>
 
           </div>
@@ -183,25 +183,25 @@ const CraftsmanProfile = () => {
         </div>
       </div>
       <Modal isOpen={modalDisplay} onRequestClose={() => {fetchUserData(); setModalDisplay(false)}} >
-        <h1 className='modal-h1'>Edit Your Profile</h1>
+        <h1 className='modal-h1'>Ihr Profil bearbeiten</h1>
         <div style={{ display: "flex", alignItems: 'center', justifyContent: 'center', marginTop: '20px' }}>
           <form onSubmit={handleSubmit(craftsmenPatch)}>
-            <input defaultValue={fullName} className='patch_inputs' type="text" placeholder="Full Name" {...register('full_name')} />
+            <input defaultValue={fullName} className='patch_inputs' type="text" placeholder="vollständiger Name" {...register('full_name')} />
             <p style={{ fontSize: '14px', color: 'red', textAlign: 'center' }}>{errors.full_name?.message}</p>
 
             <input defaultValue={userName} className='patch_inputs' type="text" placeholder="Username" {...register('username')} />
             <p style={{ fontSize: '14px', color: 'red', textAlign: 'center' }}>{errors.username?.message}</p>
 
-            <input defaultValue={craft} className='patch_inputs' type="text" placeholder="Craft" {...register('craft')} />
+            <input defaultValue={craft} className='patch_inputs' type="text" placeholder="Tätigkeitsbereich" {...register('craft')} />
             <p style={{ fontSize: '14px', color: 'red', textAlign: 'center' }}>{errors.craft?.message}</p>
 
-            <input defaultValue={price} className='patch_inputs' type="text" placeholder="Price" {...register('price')} />
+            <input defaultValue={price} className='patch_inputs' type="text" placeholder="Preis" {...register('price')} />
             <p style={{ fontSize: '14px', color: 'red', textAlign: 'center' }}>{errors.price?.message}</p>
 
-            <input defaultValue={language} className='patch_inputs' type="text" placeholder="Language" {...register('language')} />
+            <input defaultValue={language} className='patch_inputs' type="text" placeholder="Sprachen" {...register('language')} />
             <p style={{ fontSize: '14px', color: 'red', textAlign: 'center' }}>{errors.language?.message}</p>
 
-            <input defaultValue={address} className='patch_inputs' type="text" placeholder="Address" {...register('address')} />
+            <input defaultValue={address} className='patch_inputs' type="text" placeholder="Adresse" {...register('address')} />
             <p style={{ fontSize: '14px', color: 'red', textAlign: 'center' }}>{errors.address?.message}</p>
 
             <textarea defaultValue={description} style={{
@@ -212,12 +212,12 @@ const CraftsmanProfile = () => {
               outline: 'none',
               padding: '15px',
               resize: 'vertical'
-            }} rows="5" placeholder='Craft Description' {...register('description')}></textarea><br />
+            }} rows="5" placeholder='Beschreibung' {...register('description')}></textarea><br />
 
-            <input className='patch_inputs' style={{ backgroundColor: 'skyBlue', fontSize: '18px' }} type="submit" value='Save Changes' />
+            <input className='patch_inputs' style={{ backgroundColor: 'skyBlue', fontSize: '18px' }} type="submit" value='Änderungen speichern' />
           </form>
         </div>
-        <button className='modal-close' onClick={() => {fetchUserData(); setModalDisplay(false)}}>Close</button>
+        <button className='modal-close' onClick={() => {fetchUserData(); setModalDisplay(false)}}>Schließen</button>
       </Modal>
 
     </div>

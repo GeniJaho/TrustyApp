@@ -19,7 +19,7 @@ class RegisterCraftsmanAction extends AuthAction
     protected function action(): Response
     {
         if (!$this->isGuest()) {
-            throw new Exception("You're already signed in.");
+            throw new Exception("Sie sind bereits angemeldet.");
         }
 
         $data = $this->getFormData();
@@ -28,11 +28,11 @@ class RegisterCraftsmanAction extends AuthAction
             empty($data['password']) || empty($data['conf_password']) ||
             empty($data['address']) || empty($data['craft']) ||
             empty($data['price']) || empty($data['language'])) {
-            throw new Exception("Required fields are missing.");
+            throw new Exception("Erforderliche Felder fehlen.");
         }
 
         if ($data['password'] !== $data['conf_password']) {
-            throw new Exception("Passwords do not match.");
+            throw new Exception("Passwort stimmt nicht überein");
         }
 
         $craftsman = $this->craftsmanRepository->findCraftsmanOfUsername($data['username']);

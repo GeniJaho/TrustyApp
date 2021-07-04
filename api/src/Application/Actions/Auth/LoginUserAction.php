@@ -15,13 +15,13 @@ class LoginUserAction extends AuthAction
     protected function action(): Response
     {
         if (!$this->isGuest()) {
-            throw new Exception("You're already signed in.");
+            throw new Exception("Sie sind bereits angemeldet.");
         }
 
         $data = $this->getFormData();
 
         if (empty($data['username']) || empty($data['password'])) {
-            throw new Exception("Required fields are missing.");
+            throw new Exception("Erforderliche Felder fehlen.");
         }
 
         $user = $this->userRepository->findUserOfUsername($data['username']);
@@ -31,7 +31,7 @@ class LoginUserAction extends AuthAction
         }
 
         if (!password_verify($data['password'], $user->password)) {
-            throw new Exception("Your password is incorrect.");
+            throw new Exception("Passwort ist falsch.");
         }
 
         $token = $this->createCustomerToken($user);

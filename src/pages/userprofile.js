@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import tower1 from "../assets/Rectangle55.png";
 import userphoto from "../assets/Rectangle15.png";
-import pencil from "../assets/pencil.png";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import Modal from 'react-modal';
@@ -57,7 +56,7 @@ const UserProfile = () => {
       .catch(err=> alert(err.response.data.error.description))
       return
     }
-    alert('Display Name Can Not be Empty!')
+    alert('Name kann nicht leer sein!')
   } 
 
   // User Username Patch Function
@@ -82,7 +81,7 @@ const UserProfile = () => {
       .catch(err=> alert(err.response.data.error.description))
       return
     }
-    alert('Display Name Can Not be Empty!')
+    alert('Benutzername kann nicht leer sein!')
   }
 
   useEffect(()=>{
@@ -109,9 +108,6 @@ const UserProfile = () => {
             <button className="button-one">USER PROFILE</button>
             <div className="circular-icon">
               <img src={userphoto} alt="" />
-            </div>
-            <div className="circular-pencil">
-              <img src={pencil} alt="" />
             </div>
             <p className="user-name">{fullName}</p>     
           </div>

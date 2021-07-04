@@ -37,20 +37,20 @@ const Home = ({ searchValue, setSearchValue }) => {
       <div className="details">
         <div className="detailed-view">
           <p>
-            In publishing and graphic design, Lorem ipsum is a placeholder text
-            commonly used to demonstrate the visual form of a document or a
-            typeface without relying on meaning ful content. Lorem ipsum may be
-            use as a placeholder before final copy is available.
+            Brauchen Sie einen Handwerker?<br/>
+            Nutzen Sie Trusty um den passenden Handwerker zu finden.<br/>
+            Bei uns sind Sie richtig, erhalten Sie die beste Hauswartung <br/>
+            Service mit einem Klick und vereinbaren Sie vorher, wie viel Sie zahlen.
           </p>
-          <img src={Civil} alt="" />
+          <img src={Civil} alt="" className="civil"/>
         </div>
         <div className="detailed-view">
           <img src={Cutter} alt="" />
           <p>
-            In publishing and graphic design, Lorem ipsum is a placeholder text
-            commonly used to demonstrate the visual form of a document or a
-            typeface without relying on meaning ful content. Lorem ipsum may be
-            use as a placeholder before final copy is available.
+            <strong>So einfacht geht es:</strong><br/>
+                                1- schnell und unkompliziert registrieren. <br/>
+                                2- kostenlos und unverbindlich Angebote verschiedenen Handwerkern erhalten. <br/>
+                                3- Angebote mit dem besten Preis-Leistungs-Verhältnis auswählen. <br/>
           </p>
         </div>
       </div>

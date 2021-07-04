@@ -15,6 +15,7 @@ const WorkProfile = () => {
   const [reviewBody, setReviewBody] = useState('');
   const [reviewBox, setReviewBox] = useState('none');
   const [jwtToken, setJwtToken] = useState('');
+
   // Getting Craftsmen Details
   const fetchCraftsmenDetails = () => {
     const tempUserType = sessionStorage.getItem('userType');
@@ -29,8 +30,9 @@ const WorkProfile = () => {
       fetchingReviews();
     }).catch(err=> alert(err.response.data.error.description))
   }
+
   // Post Comment
-  const postComment = (e) => {
+  const postReview = (e) => {
     e.preventDefault()
     if (postRating < 1) {
       setPostRating(1)
@@ -73,8 +75,6 @@ const WorkProfile = () => {
     fetchCraftsmenDetails()
   },[id]);
 
-
-
   return (
   <div>
     <div className="work">
@@ -91,7 +91,6 @@ const WorkProfile = () => {
         <div className="worker-details">
           <div className="little-nav">
             <p>Worker Profile</p>
-            <button>kontaktieren</button>
           </div>
           <img src={userphoto} alt="" />
           <p className="name">{craftsmen.full_name}</p>
@@ -177,7 +176,7 @@ const WorkProfile = () => {
                         <img className="h-10 w-10 rounded-full" src={userphoto} alt=""/>
                       </div>
                       <div  className="min-w-0 flex-1">
-                        <form onSubmit={(e)=> postComment(e)}>
+                        <form onSubmit={(e)=> postReview(e)}>
                           <div>
                             <label htmlFor="review" className="sr-only">
                               Review

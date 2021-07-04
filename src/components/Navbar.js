@@ -3,9 +3,11 @@ import Logo from "../assets/trustylogo.png";
 import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
+  // how is this const var deklared? 
   const [userType, setUserType] = useState('');
   const [loginDisplay, setLoginDisplay] = useState('initial')
 
+  // funktion useEffect??
   useEffect(()=>{
     const tempUser = sessionStorage.getItem('userType');
     setUserType(tempUser)
@@ -18,8 +20,7 @@ const Navbar = () => {
       <nav>
         <div className="logo">
           <a href="home"><img src={Logo} alt="" /></a>
-        </div>
-        
+        </div>    
         <ul>
 
           <NavLink

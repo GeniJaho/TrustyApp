@@ -8,8 +8,8 @@ import * as yup from "yup";
 import axios from "axios";
 
 const schema = yup.object().shape({
-  username: yup.string().required('Username is required!'),
-  password: yup.string().min(8).max(20).required('Password is required!')
+  username: yup.string().required('Username ist erforderlich!'),
+  password: yup.string().min(8).max(20).required('Passwort ist erforderlich!')
 })
 
 const Signin = () => {
@@ -48,11 +48,11 @@ const Signin = () => {
     return(
         <div className="top-signup">
           <img src={Logo} alt="" />
-          <p className="signup-title">Customer Sign in</p>
+          <p className="signup-title">Kunden Login</p>
           <form onSubmit={handleSubmit(userLogin)}>
             <input className="username" type="text" placeholder="Username *" {...register('username')}/><br />
             <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.username?.message}</p>
-            <input className="password" type="password" placeholder="Password *" {...register('password')}/><br />
+            <input className="password" type="password" placeholder="Passwort *" {...register('password')}/><br />
             <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.password?.message}</p>
             <input style={{backgroundColor: 'skyBlue', fontSize: '18px'}} type="submit" value='Login' />
           </form>
@@ -64,11 +64,11 @@ const Signin = () => {
     return(
         <div className="top-signup">
           <img src={Logo} alt="" />
-          <p className="signup-title">Craftsmen Sign in</p>
+          <p className="signup-title">Handwerker Login</p>
           <form onSubmit={handleSubmit(craftsmenLogin)}>
             <input className="username" type="text" placeholder="Username *" {...register('username')}/><br />
             <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.username?.message}</p>
-            <input className="password" type="password" placeholder="Password *" {...register('password')}/><br />
+            <input className="password" type="password" placeholder="Passwort *" {...register('password')}/><br />
             <p style={{fontSize: '14px', color: 'red', textAlign: 'center'}}>{errors.password?.message}</p>
             <input style={{backgroundColor: 'skyBlue', fontSize: '18px'}} type="submit" value='Login' />
           </form>
@@ -90,15 +90,15 @@ const Signin = () => {
       {toggleLogin ? craftsmenSignin() : userSignin()}
         <div className="bottom-signup">
           <p className="sigin-route">
-            Don't have an account ?{" "}
+            Sie haben bereits ein Konto ?{" "}
             <Link
               to="/signup"
               style={{ textDecoration: "none", color: "#000000" }}
             >
-              <span>Signup</span>
+              <span>Registrieren</span>
             </Link>
           </p>
-          {toggleLogin ? <button onClick={()=> setToggleLogin(!toggleLogin)}>Login as a Customer</button> : <button onClick={()=> setToggleLogin(!toggleLogin)}>Login as a Craftsman</button>}
+          {toggleLogin ? <button onClick={()=> setToggleLogin(!toggleLogin)}>Kunden Login</button> : <button onClick={()=> setToggleLogin(!toggleLogin)}>Handwerker Login</button>}
         </div>
       </div>
     </div>

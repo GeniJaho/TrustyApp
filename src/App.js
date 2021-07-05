@@ -23,7 +23,7 @@ function App() {
           <Route path="/craftsman/signup" component={CraftsmanSignup} />
           <Route path="/home"><Home searchValue={searchValue} setSearchValue={setSearchValue} /></Route>
           <Route path="/about" component={About}></Route>
-          <Route path="/work/:id" component={WorkProfile}></Route>
+          <Route path="/work/:id(\d+)" component={WorkProfile}></Route>
           <Route path="/filter"><Filter searchValue={searchValue} setSearchValue={setSearchValue} /></Route>
           <Route path="/user" component={UserProfile}/>
           <Route path="/craftsman/profile" component={CraftsmanProfile}/>
